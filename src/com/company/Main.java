@@ -8,15 +8,13 @@ import javax.swing.JFrame;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Array;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.*;
@@ -725,7 +723,7 @@ public class Main {
 
         JButton deleteButton = new JButton("Izbriši podatak");
         deleteButton.setForeground(Color.white);
-        deleteButton.setBackground(Color.decode("#e60000"));
+        deleteButton.setBackground(Color.decode("#a83232"));
         deleteButton.setPreferredSize(new Dimension(200, 50));
 
 
@@ -2171,7 +2169,154 @@ labelIconThree.getTheObject().addMouseListener(new MouseAdapter() {
 deleteButton.addMouseListener(new MouseListener() {
     @Override
     public void mouseClicked(MouseEvent e) {
+        GridBagLayout gridBagLayout= new GridBagLayout();
+        GridBagConstraints gridBagConstraints= new GridBagConstraints();
+        JDialog deleteDialog= new JDialog();
+        deleteDialog.setTitle("Dialog za brisanje");
+        deleteDialog.setPreferredSize(new Dimension(800,500));
+         JPanel jPanel= new JPanel();
+         jPanel.setPreferredSize(new Dimension(800,500));
+         jPanel.setBackground(Color.darkGray);
+         jPanel.setLayout(gridBagLayout);
+
+        JLabel jLabel= new JLabel();
+        jLabel.setPreferredSize(new Dimension(500,100));
+        jLabel.setForeground(Color.white);
+        jLabel.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#66d9ff")));
+
+
+        JButton no= new JButton("Odustani");
+        no.setPreferredSize(new Dimension(200, 50));
+        no.setBackground(Color.darkGray);
+        no.setForeground(Color.lightGray);
+
+        JButton yes= new JButton("Izbriši");
+        yes.setPreferredSize(new Dimension(200, 50));
+        yes.setBackground(Color.decode("#ad070d"));
+        yes.setForeground(Color.WHITE);
+
+
+
+
+
+        gridBagConstraints.gridx=1;
+        gridBagConstraints.gridy=0;
+
+        gridBagConstraints.insets=new Insets(20,50,0,0);
+
+        jPanel.add(jLabel, gridBagConstraints);
+
+
+        gridBagConstraints.gridx=0;
+        gridBagConstraints.gridy=1;
+        gridBagConstraints.insets=new Insets(20,0,0,160);
+        jPanel.add(no, gridBagConstraints);
+
+
+        gridBagConstraints.gridx=0;
+        gridBagConstraints.gridy=1;
+        gridBagConstraints.insets=new Insets(20,300,0,0);
+        jPanel.add(yes,gridBagConstraints);
+
+        deleteDialog.add(jPanel);
+        deleteDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        deleteDialog.pack();
+        //deleteDialog.setVisible(false);
+
         if (!(searchForDeletion.getTheObject().getText().isEmpty())){
+
+            ConnectionHandler connectionHandler1= new ConnectionHandler();
+            try {
+                PreparedStatement statement=connectionHandler1.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info WHERE id='"+searchForDeletion.getTheObject().getText()+"' ");
+                ResultSet resultSet=statement.executeQuery();
+                while (resultSet.next()){
+                    constraints.gridx=0;
+                    constraints.gridy=0;
+                    jPanel.add(jLabel);
+                    jLabel.setText(String.valueOf("Potvrdite brisanje unosa sa id brojem "+resultSet.getInt("id")+" "+ resultSet.getString("name")+ " (" +resultSet.getString("fatherName")+ ") "+ resultSet.getString("surname")));
+                    deleteDialog.setVisible(true);
+
+
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            yes.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    //searchForDeletion.getTheObject().setText("");
+                    jLabel.setText("");
+                    deleteDialog.setVisible(false);
+                    String deleteQuery=("DELETE FROM info WHERE id='"+searchForDeletion.getTheObject().getText()+"'");
+
+                    try {
+                        Connection connection=connectionHandler1.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-" );
+
+                        PreparedStatement preparedStatement= connection.prepareStatement(deleteQuery);
+                        preparedStatement.executeUpdate();
+                        searchForDeletion.getTheObject().setText("");
+                        connection.close();
+
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+
+        }else {
+            GridBagLayout gridBagLayout1= new GridBagLayout();
+            GridBagConstraints gridBagConstraints1= new GridBagConstraints();
+            JDialog deleteDialog1= new JDialog();
+            deleteDialog1.setTitle("Nije unešena vrijednost");
+            deleteDialog1.setPreferredSize(new Dimension(500,300));
+            JPanel jPanel1= new JPanel();
+            jPanel1.setPreferredSize(new Dimension(500,300));
+            jPanel1.setBackground(Color.darkGray);
+            jPanel1.setLayout(gridBagLayout1);
+
+            JLabel jLabel1= new JLabel();
+            jLabel1.setPreferredSize(new Dimension(400,100));
+            jLabel1.setForeground(Color.decode("#ad070d"));
+            jLabel1.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#66d9ff")));
+            jLabel1.setText("Morate unijeti vrijednost u polje za brisanje");
+
+
+
+            gridBagConstraints1.gridx=0;
+            gridBagConstraints1.gridy=0;
+
+
+            jPanel1.add(jLabel1, gridBagConstraints1);
+
+
+            deleteDialog1.add(jPanel1);
+            deleteDialog1.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            deleteDialog1.pack();
+            deleteDialog1.setVisible(true);
+
+
 
         }
     }
