@@ -723,8 +723,42 @@ public class Main {
 
         JButton deleteButton = new JButton("Izbriši podatak");
         deleteButton.setForeground(Color.white);
-        deleteButton.setBackground(Color.decode("#a83232"));
+        deleteButton.setBackground(Color.decode("#e76e54"));
         deleteButton.setPreferredSize(new Dimension(200, 50));
+// za zutu kantu <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        // za plavu vecu kantu sa poklopce<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+// za orange kanu sa krugom <div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        ImageIcon iIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/trash.png");
+        JLabel traschCanIcon= new JLabel(iIcon);
+
+        // for 64 big remove<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+// for orange 32 traschcan<div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+
+        JDialog defaultJDialog= new JDialog();
+        defaultJDialog.setPreferredSize(new Dimension(600,400));
+        defaultJDialog.setTitle("Upozorenje");
+        JPanel defaultJPanel= new JPanel();
+        defaultJPanel.setPreferredSize(new Dimension(600,400));
+        defaultJPanel.setBackground(Color.darkGray);
+        defaultJPanel.setLayout(new GridBagLayout());
+        ImageIcon warningIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
+        JLabel defaultJLabel=new JLabel(warningIcon);
+        JLabel defaultJLabelText= new JLabel("Upozorenje");
+        defaultJLabelText.setForeground(Color.white);
+
+        constraints.gridx=0;
+        constraints.gridy=0;
+        constraints.insets= new Insets(0, 0, 20, 0);
+        defaultJPanel.add(defaultJLabel, constraints);
+        constraints.gridx=0;
+        constraints.gridy=1;
+        defaultJPanel.add(defaultJLabelText, constraints);
+        defaultJDialog.add(defaultJPanel);
+        defaultJDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        defaultJDialog.pack();
+        defaultJDialog.setVisible(false);
 
 
 
@@ -996,15 +1030,27 @@ public class Main {
 
         constraints.gridx=0;
         constraints.gridy=0;
-        deletePanel.getTheObject().add(searchForDeletion.getTheObject(), constraints);
+        constraints.insets= new Insets(0,0,0,25);
+        deletePanel.getTheObject().add(traschCanIcon, constraints);
 
-        constraints.gridx=0;
-        constraints.gridy=1;
-        deletePanel.getTheObject().add(deleteLabel.getTheObject(), constraints);
 
         constraints.gridx=1;
         constraints.gridy=0;
+        deletePanel.getTheObject().add(searchForDeletion.getTheObject(), constraints);
+
+        constraints.gridx=2;
+        constraints.gridy=0;
+        constraints.insets= new Insets(0,25,0,0);
         deletePanel.getTheObject().add(deleteButton, constraints);
+
+        constraints.gridx=1;
+        constraints.gridy=1;
+        constraints.insets= new Insets(0,0,0,0);
+        deletePanel.getTheObject().add(deleteLabel.getTheObject(), constraints);
+
+
+
+
 
 
 
