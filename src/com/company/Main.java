@@ -21,7 +21,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+
 public class Main {
+
+
 
 
     public static LocalDateTime convertDate(Date date) {
@@ -128,6 +136,20 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException {
+
+        DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
+        defaultPieDataset.setValue("value", 30);
+        defaultPieDataset.setValue("value2", 45);
+        JFreeChart chart= ChartFactory.createPieChart3D("Values", defaultPieDataset, true, true, false);
+
+        JFrame chartJFrame= new JFrame();
+        chartJFrame.setPreferredSize(new Dimension(800,500));
+        ChartPanel chartPanel= new ChartPanel(chart);
+        chartJFrame.add(chartPanel);
+        chartJFrame.pack();
+        chartJFrame.setVisible(true);
+
+
 
 
         //JDBC
@@ -264,6 +286,14 @@ public class Main {
         MyFrame<JLabel> labelIconThree = new MyFrame<JLabel>(new JLabel(iconDelete));
         labelIconThree.getTheObject().setSize(new Dimension(32, 32));
         labelIconThree.getTheObject().setToolTipText("Brisanje podataka");
+
+        ImageIcon statsIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/stats.png");
+        //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        //"Icon made by Freepik from www.flaticon.com"
+        MyFrame<JLabel> labelIconStats = new MyFrame<JLabel>(new JLabel(statsIcon));
+        labelIconStats.getTheObject().setSize(new Dimension(32, 32));
+        labelIconStats.getTheObject().setToolTipText("Statistika");
+
 
         ImageIcon iconShutDown = new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/power-button(1).png");
         //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -1064,7 +1094,9 @@ public class Main {
         sidePanel.getTheObject().add(labelIconOne.getTheObject());
         sidePanel.getTheObject().add(labelIconThree.getTheObject());
         sidePanel.getTheObject().add(labelIconTwo.getTheObject());
+        sidePanel.getTheObject().add(labelIconStats.getTheObject());
         sidePanel.getTheObject().add(labelIconFour.getTheObject());
+
 
 
         // Add to JFrame
@@ -2043,13 +2075,15 @@ public class Main {
                     JPanel jPanel= new JPanel(new GridBagLayout());
                     jPanel.setPreferredSize(new Dimension(250, 250));
                     jPanel.setBackground(Color.darkGray);
-                    JLabel jLabel= new JLabel("Molimo izaberite filtere ili upišite traženi pojam");
-                    jLabel.setPreferredSize(new Dimension(350, 50));
-                    jLabel.setForeground(Color.decode("#cc0000"));
-                    jPanel.add(jLabel);
-                    jDialog.add(jPanel);
-                    jDialog.pack();
-                    jDialog.setVisible(true);
+                    //JLabel jLabel= new JLabel("Molimo izaberite filtere ili upišite traženi pojam");
+                    //jLabel.setPreferredSize(new Dimension(350, 50));
+                   // jLabel.setForeground(Color.decode("#cc0000"));
+                   // jPanel.add(jLabel);
+                    //jDialog.add(jPanel);
+                    //jDialog.pack();
+                    //jDialog.setVisible(true);
+                    defaultJLabelText.setText("Molimo izaberite filtere ili upišite traženi pojam");
+                    defaultJDialog.setVisible(true);
 
                 }
 
@@ -2412,6 +2446,44 @@ deleteButton.addMouseListener(new MouseListener() {
 
 
         }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+});
+
+labelIconStats.getTheObject().addMouseListener(new MouseListener() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
+        defaultPieDataset.setValue("value", 30);
+        defaultPieDataset.setValue("value2", 45);
+        JFreeChart chart= ChartFactory.createPieChart3D("Values", defaultPieDataset, true, true, false);
+
+        JFrame chartJFrame= new JFrame();
+        chartJFrame.setPreferredSize(new Dimension(800,500));
+        ChartPanel chartPanel= new ChartPanel(chart);
+        JPanel chJPanel= new JPanel();
+        chartJFrame.add(chartPanel);
+        chartJFrame.pack();
+        chartJFrame.setVisible(true);
     }
 
     @Override
