@@ -11,14 +11,14 @@ public class ConnectionHandler {
     private String credentials;
     private Connection connection=null;
     private ResultSet resultSet=null;
-   // private Connection conn = null;
+    private Connection conn = null;
 
 
 
     public  Connection getCon (String url, String username, String password) throws SQLException {
-        Connection conn;
-    try {
         conn= DriverManager.getConnection(url,username,password);
+    try {
+        //conn= DriverManager.getConnection(url,username,password);
         System.out.println("Succes and working");
         return conn;
 
@@ -28,7 +28,7 @@ public class ConnectionHandler {
         e.printStackTrace();
     }
     finally {
-
+        //conn.close();
     }
 
 return null;

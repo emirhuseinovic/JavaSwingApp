@@ -9,13 +9,10 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
 import java.util.Date;
-import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -137,7 +134,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
+       /* DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
         defaultPieDataset.setValue("value", 30);
         defaultPieDataset.setValue("value2", 45);
         JFreeChart chart= ChartFactory.createPieChart3D("Values", defaultPieDataset, true, true, false);
@@ -147,7 +144,7 @@ public class Main {
         ChartPanel chartPanel= new ChartPanel(chart);
         chartJFrame.add(chartPanel);
         chartJFrame.pack();
-        chartJFrame.setVisible(true);
+        chartJFrame.setVisible(true);*/
 
 
 
@@ -753,7 +750,7 @@ public class Main {
 
         JButton deleteButton = new JButton("Izbriši podatak");
         deleteButton.setForeground(Color.white);
-        deleteButton.setBackground(Color.decode("#e76e54"));
+        deleteButton.setBackground(Color.decode("#f44336"));
         deleteButton.setPreferredSize(new Dimension(200, 50));
 // za zutu kantu <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -1172,6 +1169,7 @@ public class Main {
             @Override
             public void mouseClicked(MouseEvent e) {
                 popUpFrameTwo.getTheObject().setVisible(true);
+                popUpFrame.getTheObject().setVisible(false);
             }
 
             @Override
@@ -1200,6 +1198,7 @@ public class Main {
             public void mouseClicked(MouseEvent e) {
 
                 popUpFrameTwo.getTheObject().setVisible(false);
+                popUpFrame.getTheObject().setVisible(true);
             }
 
             @Override
@@ -1251,6 +1250,7 @@ public class Main {
                     if (!(studentFatherName.getTheObject().getText().isEmpty())){
                         if (!(studentSurname.getTheObject().getText().isEmpty())){
                             popUpFrameThree.getTheObject().setVisible(true);
+                            popUpFrameTwo.getTheObject().setVisible(false);
                         }
                     }
 
@@ -1259,7 +1259,8 @@ public class Main {
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+                popUpFrameTwo.getTheObject().setVisible(true);
+                popUpFrame.getTheObject().setVisible(false);
             }
 
             @Override
@@ -1277,6 +1278,7 @@ public class Main {
 
             }
         });
+
 
 
         loginButton.getTheObject().addMouseListener(new MouseListener() {
@@ -2007,67 +2009,7 @@ public class Main {
 
                 }
 
-               /* if (sortList.getTheObject().getSelectedItem().equals("Filter") && sortList1.getTheObject().getSelectedItem().equals("ASC/DESC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
-                    Object[][] values = new Object[0][];
-                    System.out.println(sortList.getTheObject().getSelectedItem());
-                    System.out.println(sortList1.getTheObject().getSelectedItem());
-                    Object[] tempArray;
-                    DefaultTableModel tableModel = new DefaultTableModel(values, columns);
-                    ResultSet set = null;
 
-                    try {
-                        PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info");
-                        set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-
-                    try {
-                        while (set.next()) {
-
-                            tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
-                                    set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
-                                    set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
-                                    set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
-                                    set.getString("fC"), set.getString("cC"), set.getString("sD"), set.getDouble("ex"), set.getString("sum")};
-
-
-                            tableModel.addRow(tempArray);
-
-
-                        }
-
-
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    JTable jTable = new JTable(tableModel);
-
-                    JScrollPane jScrollPane = new JScrollPane(jTable);
-                    jScrollPane.createHorizontalScrollBar();
-                    jScrollPane.createVerticalScrollBar();
-                    //JButton button = new JButton("Ime asc");
-                    JPanel resPanel = new JPanel();
-                    resPanel.setPreferredSize(new Dimension(1600,900));
-                    resPanel.setBackground(Color.darkGray);
-                    //resPanel.add(button);
-                    resPanel.add(jScrollPane);
-                    jScrollPane.setPreferredSize(new Dimension(1600, 900));
-
-
-                    JFrame jFrame = new JFrame();
-                    jFrame.setPreferredSize(new Dimension(1600, 900));
-                    jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    jFrame.add(resPanel);
-                    jFrame.pack();
-                    jFrame.setVisible(true);
-
-
-
-                }*/
                 if (sortList.getTheObject().getSelectedItem().equals("Filter") && sortList1.getTheObject().getSelectedItem().equals("ASC/DESC") && searchData2.getTheObject().getText().isEmpty() ){
                     JDialog jDialog= new JDialog();
                     jDialog.setTitle("Upozorenje");
@@ -2158,72 +2100,7 @@ public class Main {
 
                 }
 
-                /*else {
-                    //if (sortList.getTheObject().getSelectedItem().equals("Filter") && sortList1.getTheObject().getSelectedItem().equals("ASC/DESC")) {
-                        String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
-                        Object[][] values = new Object[0][];
-                        System.out.println(sortList.getTheObject().getSelectedItem());
-                        System.out.println(sortList1.getTheObject().getSelectedItem());
-                        Object[] tempArray;
-                        DefaultTableModel tableModel = new DefaultTableModel(values, columns);
-                        ResultSet set = null;
 
-                        try {
-                            PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info");
-                            set = preparedStatement.executeQuery();
-                            //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
-
-                        try {
-                            while (set.next()) {
-
-                                tempArray = new Object[]{
-                                        set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
-                                        set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
-                                        set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
-                                        set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
-                                        set.getString("fC"), set.getString("cC"), set.getString("sD"), set.getDouble("ex"), set.getString("sum")};
-
-
-                                tableModel.addRow(tempArray);
-
-
-                            }
-
-
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
-                        }
-                        JTable jTable = new JTable(tableModel);
-
-                        JScrollPane jScrollPane = new JScrollPane(jTable);
-                        jScrollPane.createHorizontalScrollBar();
-                        jScrollPane.createVerticalScrollBar();
-                        //JButton button = new JButton("Ime asc");
-                        JPanel resPanel = new JPanel();
-                        resPanel.setPreferredSize(new Dimension(1600,900));
-                        resPanel.setBackground(Color.darkGray);
-                        //resPanel.add(button);
-                        resPanel.add(jScrollPane);
-                        jScrollPane.setPreferredSize(new Dimension(1600, 900));
-
-
-                        JFrame jFrame = new JFrame();
-                        jFrame.setPreferredSize(new Dimension(1600, 900));
-                        jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        jFrame.add(resPanel);
-                        jFrame.pack();
-                        jFrame.setVisible(true);
-
-
-
-                    }*/
-
-
-
-               // }
 
             }
 
@@ -2319,7 +2196,7 @@ deleteButton.addMouseListener(new MouseListener() {
 
         JButton yes= new JButton("Izbriši");
         yes.setPreferredSize(new Dimension(200, 50));
-        yes.setBackground(Color.decode("#ad070d"));
+        yes.setBackground(Color.decode("#f44336"));
         yes.setForeground(Color.WHITE);
 
 
@@ -2473,16 +2350,45 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
     @Override
     public void mouseClicked(MouseEvent e) {
         DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
-        defaultPieDataset.setValue("value", 30);
-        defaultPieDataset.setValue("value2", 45);
-        JFreeChart chart= ChartFactory.createPieChart3D("Values", defaultPieDataset, true, true, false);
+       // defaultPieDataset.setValue("value", 30);
+       // defaultPieDataset.setValue("value2", 45);
+        JFreeChart chart= ChartFactory.createPieChart3D("Procenat primljenih učenika", defaultPieDataset, true, true, false);
 
         JFrame chartJFrame= new JFrame();
         chartJFrame.setPreferredSize(new Dimension(800,500));
         ChartPanel chartPanel= new ChartPanel(chart);
-        JPanel chJPanel= new JPanel();
         chartJFrame.add(chartPanel);
         chartJFrame.pack();
+       // chartJFrame.setVisible(true);
+
+        ConnectionHandler conHand= new ConnectionHandler();
+
+        try {
+            PreparedStatement sTmT= conHand.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-" ).prepareStatement("SELECT sum FROM info WHERE sum>54");
+           ResultSet resSet=sTmT.executeQuery();
+           while (resSet.next()){
+               defaultPieDataset.setValue("Broj učenika koji zadovoljavaju kriterije", resSet.getRow());
+
+
+           }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        PreparedStatement sTmT= null;
+        try {
+            sTmT = conHand.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-" ).prepareStatement("SELECT * FROM info");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            ResultSet resSet=sTmT.executeQuery();
+            while (resSet.next()){
+                defaultPieDataset.setValue("Ukupan broj prijavljenih učenika", resSet.getRow());
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
         chartJFrame.setVisible(true);
     }
 
@@ -2506,6 +2412,34 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
 
     }
 });
+
+        backButtonPoPThree.getTheObject().addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                popUpFrameThree.getTheObject().setVisible(false);
+                popUpFrameTwo.getTheObject().setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
 
     }
