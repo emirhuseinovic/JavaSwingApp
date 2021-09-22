@@ -1136,6 +1136,7 @@ public class Main {
 
 
         nextButton.getTheObject().addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 popUpFrameTwo.getTheObject().setVisible(true);
@@ -1165,6 +1166,7 @@ public class Main {
         previousButtonPPT.getTheObject().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 popUpFrameTwo.getTheObject().setVisible(false);
             }
 
@@ -1191,7 +1193,36 @@ public class Main {
         nextButtonPPT.getTheObject().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                popUpFrameThree.getTheObject().setVisible(true);
+
+                if (studentName.getTheObject().getText().equals("")){
+                    defaultJLabelText.setText("Sva polja nemaju unešenu vrijednost");
+                    defaultJDialog.setVisible(true);
+                    popUpFrameThree.getTheObject().setVisible(false);
+
+
+                }if (studentFatherName.getTheObject().getText().equals("")){
+                    defaultJLabelText.setText("Sva polja nemaju unešenu vrijednost");
+                    defaultJDialog.setVisible(true);
+                    popUpFrameThree.getTheObject().setVisible(false);
+
+
+                }
+                if (studentSurname.getTheObject().getText().equals("")){
+                    defaultJLabelText.setText("Sva polja nemaju unešenu vrijednost");
+                    defaultJDialog.setVisible(true);
+                    popUpFrameThree.getTheObject().setVisible(false);
+
+
+                }
+
+                if (!(studentName.getTheObject().getText().isEmpty())){
+                    if (!(studentFatherName.getTheObject().getText().isEmpty())){
+                        if (!(studentSurname.getTheObject().getText().isEmpty())){
+                            popUpFrameThree.getTheObject().setVisible(true);
+                        }
+                    }
+
+                }
             }
 
             @Override
@@ -1237,7 +1268,9 @@ public class Main {
                             localGBC.gridx = 1;
                             localGBC.gridy = 4;
                             localGBC.insets = new Insets(10, 0, 0, 0);
-                            loginPanel.getTheObject().add(error.getTheObject(), localGBC);
+                            //loginPanel.getTheObject().add(error.getTheObject(), localGBC);
+                            defaultJLabelText.setText("Korisnicko ime ili šifra nisu tačni");
+                            defaultJDialog.setVisible(true);
                         }
                     }
 
@@ -1272,126 +1305,140 @@ public class Main {
         finishButtonPoPThree.getTheObject().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (extGradData.getText().isEmpty()){
+                    resultsJFrame.getTheObject().setVisible(false);
+                    defaultJLabelText.setText("Polje za eksternu maturu ne može biti prazno");
+                    defaultJDialog.setVisible(true);
+                }else {
 
-                resultsJFrame.getTheObject().setVisible(true);
-                popUpFrame.getTheObject().setVisible(false);
-                popUpFrameTwo.getTheObject().setVisible(false);
-                popUpFrameThree.getTheObject().setVisible(false);
-
-
-                String schoolYear = (String) schoolYearsListData.getTheObject().getSelectedItem();
-
-                Date jcalValue = jCalendar.getTheObject().getDate();
-                LocalDateTime currentDates = convertDate(jcalValue);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String stringify = formatter.format(currentDates);
+                    resultsJFrame.getTheObject().setVisible(true);
+                    popUpFrame.getTheObject().setVisible(false);
+                    popUpFrameTwo.getTheObject().setVisible(false);
+                    popUpFrameThree.getTheObject().setVisible(false);
 
 
-                String student = studentName.getTheObject().getText();
-                String father = studentFatherName.getTheObject().getText();
-                String studentLastname = studentSurname.getTheObject().getText();
+                    String schoolYear = (String) schoolYearsListData.getTheObject().getSelectedItem();
 
-                Date dobValue = dob.getTheObject().getDate();
-                LocalDateTime selectedDob = convertDate(dobValue);
-                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                String stringifyDob = formatter1.format(selectedDob);
+                    Date jcalValue = jCalendar.getTheObject().getDate();
+                    LocalDateTime currentDates = convertDate(jcalValue);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    String stringify = formatter.format(currentDates);
 
-
-                Double generalVI = (Double) gradesData.getTheObject().getSelectedItem();
-                String genVIS = generalVI.toString();
-                double genVI = Double.parseDouble(genVIS);
-
-                Double generalVII = (Double) gradesDataVII.getTheObject().getSelectedItem();
-                String genVIIS = generalVII.toString();
-                double genVII = Double.parseDouble(genVIIS);
-
-                Double generalVIII = (Double) gradesDataVIII.getTheObject().getSelectedItem();
-                String genVIIIS = generalVIII.toString();
-                double genVIII = Double.parseDouble(genVIIIS);
-
-                Double generalIX = (Double) gradesDataIX.getTheObject().getSelectedItem();
-                String genIXS = generalIX.toString();
-                double genIX = Double.parseDouble(genIXS);
-
-                Double subj1 = (Double) relSubj1.getTheObject().getSelectedItem();
-                String sb1 = subj1.toString();
-                double dsb1 = Double.parseDouble(sb1);
-
-                Double subj2 = (Double) relSubj2.getTheObject().getSelectedItem();
-                String sb2 = subj2.toString();
-                double dsb2 = Double.parseDouble(sb2);
-
-                Double subj3 = (Double) relSubj3.getTheObject().getSelectedItem();
-                String sb3 = subj3.toString();
-                double dsb3 = Double.parseDouble(sb3);
-
-                Double subj4 = (Double) relSubj4.getTheObject().getSelectedItem();
-                String sb4 = subj4.toString();
-                double dsb4 = Double.parseDouble(sb4);
-
-                Double subj5 = (Double) relSubj5.getTheObject().getSelectedItem();
-                String sb5 = subj5.toString();
-                double dsb5 = Double.parseDouble(sb5);
-
-                Double subj6 = (Double) relSubj6.getTheObject().getSelectedItem();
-                String sb6 = subj6.toString();
-                double dsb6 = Double.parseDouble(sb6);
-
-                String extString = extGradData.getText();
+                    String student = null;
+                    String father = null;
+                    String studentLastname = null;
 
 
-                boolean internationalC = internationalComp.isSelected();
-                String intC;
-                double resultSum = 0;
-                if (internationalC == true) {
-                    intC = "DA";
-                    competitionsSum = 10;
-                    System.out.println("intsum" + competitionsSum);
-                } else {
-                    intC = "NE";
+                    student = studentName.getTheObject().getText();
+
+
+                    father = studentFatherName.getTheObject().getText();
+
+
+                    studentLastname = studentSurname.getTheObject().getText();
+
+
+                    Date dobValue = dob.getTheObject().getDate();
+                    LocalDateTime selectedDob = convertDate(dobValue);
+                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    String stringifyDob = formatter1.format(selectedDob);
+
+
+                    Double generalVI = (Double) gradesData.getTheObject().getSelectedItem();
+                    String genVIS = generalVI.toString();
+                    double genVI = Double.parseDouble(genVIS);
+
+                    Double generalVII = (Double) gradesDataVII.getTheObject().getSelectedItem();
+                    String genVIIS = generalVII.toString();
+                    double genVII = Double.parseDouble(genVIIS);
+
+                    Double generalVIII = (Double) gradesDataVIII.getTheObject().getSelectedItem();
+                    String genVIIIS = generalVIII.toString();
+                    double genVIII = Double.parseDouble(genVIIIS);
+
+                    Double generalIX = (Double) gradesDataIX.getTheObject().getSelectedItem();
+                    String genIXS = generalIX.toString();
+                    double genIX = Double.parseDouble(genIXS);
+
+                    Double subj1 = (Double) relSubj1.getTheObject().getSelectedItem();
+                    String sb1 = subj1.toString();
+                    double dsb1 = Double.parseDouble(sb1);
+
+                    Double subj2 = (Double) relSubj2.getTheObject().getSelectedItem();
+                    String sb2 = subj2.toString();
+                    double dsb2 = Double.parseDouble(sb2);
+
+                    Double subj3 = (Double) relSubj3.getTheObject().getSelectedItem();
+                    String sb3 = subj3.toString();
+                    double dsb3 = Double.parseDouble(sb3);
+
+                    Double subj4 = (Double) relSubj4.getTheObject().getSelectedItem();
+                    String sb4 = subj4.toString();
+                    double dsb4 = Double.parseDouble(sb4);
+
+                    Double subj5 = (Double) relSubj5.getTheObject().getSelectedItem();
+                    String sb5 = subj5.toString();
+                    double dsb5 = Double.parseDouble(sb5);
+
+                    Double subj6 = (Double) relSubj6.getTheObject().getSelectedItem();
+                    String sb6 = subj6.toString();
+                    double dsb6 = Double.parseDouble(sb6);
+
+                    String extString = extGradData.getText();
+
+
+                    boolean internationalC = internationalComp.isSelected();
+                    String intC;
+                    double resultSum = 0;
+                    if (internationalC == true) {
+                        intC = "DA";
+                        competitionsSum = 10;
+                        System.out.println("intsum" + competitionsSum);
+                    } else {
+                        intC = "NE";
+                    }
+                    boolean federalC = federalComp.isSelected();
+                    String fedC;
+                    if (federalC == true) {
+                        fedC = "DA";
+                        competitionsSum = 8;
+                        System.out.println("fedsum" + competitionsSum);
+                    } else {
+                        fedC = "NE";
+                    }
+                    boolean cantonalC = cantonalComp.isSelected();
+                    String canC;
+                    if (cantonalC == true) {
+                        canC = "DA";
+                        competitionsSum = 5;
+                        System.out.println("cantsum" + competitionsSum);
+                    } else {
+                        canC = "NE";
+                    }
+                    if (internationalC == true && federalC == true && cantonalC == true) {
+                        competitionsSum = 10;
+                        System.out.println("All competitions" + competitionsSum);
+                    }
+                    boolean specialD = specialDiplom.isSelected();
+                    String speC;
+                    double hasSpecialDiplom = 0;
+                    if (specialD == true) {
+                        speC = "DA";
+                        hasSpecialDiplom = 15;
+                        System.out.println("hasspecial diplom" + hasSpecialDiplom);
+                    } else {
+                        speC = "NE";
+                    }
+
+                    double sumSumare = addPoints(genVI) + addPoints(genVII) + addPoints(genVIII) + addPoints(genIX) +
+                            addPointsRp(dsb1) + addPointsRp(dsb2) + addPointsRp(dsb3) + addPointsRp(dsb4) + addPointsRp(dsb5) + addPointsRp(dsb6)
+                            + exCalc(extString) + competitionsSum + hasSpecialDiplom;
+
+
+                    //String q=String.format(Locale.US, "INSERT INTO info(schoolYear, entryDate, name, fatherName, surname, dob, gs7, gs8, gs9, relSubj18, relSubj28, relSubj38, relSubj19, relSubj29, relSubj39, iC, fC, cC, sD) VALUES ('"+schoolYear+"','"+stringify+"','"+student+"', '"+father+"', '"+studentLastname+"','"+stringifyDob+"', '"+generalVII+"','"+generalVIII+"','"+generalIX+"', '"+relSubj1+"', '"+relSubj2+"','"+relSubj3+"','"+relSubj4+"', '"+relSubj5+"', '"+relSubj6+"', '"+internationalC+"','"+federalC+"', '"+cantonalC+"','"+specialD+"')",123456789);
+                    String insertQuery = "INSERT INTO info(schoolYear, entryDate, name, fatherName, surname, dob, gs7, gs8, gs9, relSubj18, relSubj28, relSubj38, relSubj19, relSubj29, relSubj39, iC, fC, cC, sD, ex, sum) VALUES ('" + schoolYear + "','" + stringify + "','" + student + "', '" + father + "', '" + studentLastname + "','" + stringifyDob + "', '" + generalVII + "','" + generalVIII + "','" + generalIX + "', '" + dsb1 + "' , '" + dsb2 + "','" + dsb3 + "','" + dsb4 + "', '" + dsb5 + "', '" + dsb6 + "', '" + intC + "','" + fedC + "', '" + canC + "','" + speC + "','" + extString + "', '" + sumSumare + "')";
+                    connectionHandler.connectAndCrud(insertQuery);
                 }
-                boolean federalC = federalComp.isSelected();
-                String fedC;
-                if (federalC == true) {
-                    fedC = "DA";
-                    competitionsSum = 8;
-                    System.out.println("fedsum" + competitionsSum);
-                } else {
-                    fedC = "NE";
-                }
-                boolean cantonalC = cantonalComp.isSelected();
-                String canC;
-                if (cantonalC == true) {
-                    canC = "DA";
-                    competitionsSum = 5;
-                    System.out.println("cantsum" + competitionsSum);
-                } else {
-                    canC = "NE";
-                }
-                if (internationalC == true && federalC == true && cantonalC == true) {
-                    competitionsSum = 10;
-                    System.out.println("All competitions" + competitionsSum);
-                }
-                boolean specialD = specialDiplom.isSelected();
-                String speC;
-                double hasSpecialDiplom = 0;
-                if (specialD == true) {
-                    speC = "DA";
-                    hasSpecialDiplom = 15;
-                    System.out.println("hasspecial diplom" + hasSpecialDiplom);
-                } else {
-                    speC = "NE";
-                }
-
-                double sumSumare = addPoints(genVI) + addPoints(genVII) + addPoints(genVIII) + addPoints(genIX) +
-                        addPointsRp(dsb1) + addPointsRp(dsb2) + addPointsRp(dsb3) + addPointsRp(dsb4) + addPointsRp(dsb5) + addPointsRp(dsb6)
-                        + exCalc(extString) + competitionsSum + hasSpecialDiplom;
-
-
-                //String q=String.format(Locale.US, "INSERT INTO info(schoolYear, entryDate, name, fatherName, surname, dob, gs7, gs8, gs9, relSubj18, relSubj28, relSubj38, relSubj19, relSubj29, relSubj39, iC, fC, cC, sD) VALUES ('"+schoolYear+"','"+stringify+"','"+student+"', '"+father+"', '"+studentLastname+"','"+stringifyDob+"', '"+generalVII+"','"+generalVIII+"','"+generalIX+"', '"+relSubj1+"', '"+relSubj2+"','"+relSubj3+"','"+relSubj4+"', '"+relSubj5+"', '"+relSubj6+"', '"+internationalC+"','"+federalC+"', '"+cantonalC+"','"+specialD+"')",123456789);
-                String insertQuery = "INSERT INTO info(schoolYear, entryDate, name, fatherName, surname, dob, gs7, gs8, gs9, relSubj18, relSubj28, relSubj38, relSubj19, relSubj29, relSubj39, iC, fC, cC, sD, ex, sum) VALUES ('" + schoolYear + "','" + stringify + "','" + student + "', '" + father + "', '" + studentLastname + "','" + stringifyDob + "', '" + generalVII + "','" + generalVIII + "','" + generalIX + "', '" + dsb1 + "' , '" + dsb2 + "','" + dsb3 + "','" + dsb4 + "', '" + dsb5 + "', '" + dsb6 + "', '" + intC + "','" + fedC + "', '" + canC + "','" + speC + "','" + extString + "', '" + sumSumare + "')";
-                connectionHandler.connectAndCrud(insertQuery);
-
                 //create table info (id int not null auto_increment primary key, schoolYear varchar (256) not null, entryDate varchar (256) not null, name varchar (256) not null, fatherName varchar (256) not null, surname varchar (256) not null, dob varchar (256) not null, gs7 double not null, gs8 double not null, gs9 double not null, relSubj18 double not null, relSubj28 double not null, relSubj38 double not null, relSubj19 double not null, relSubj29 double not null, relSubj39 double not null, iC varchar(256) not null, fC varchar(256) not null, cC varchar(256) not null, sD varchar(256) not null, ex double not null, sum double not null);
             }
 
