@@ -2441,6 +2441,142 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
             }
         });
 
+        newAccountLink.getTheObject().addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                 MyFrame<JLabel> newAccountHeadline = new MyFrame<JLabel>(new JLabel("Kreirajte novi račun"));
+                newAccountHeadline.getTheObject().setPreferredSize(new Dimension(200, 50));
+                newAccountHeadline.getTheObject().setHorizontalAlignment(JLabel.CENTER);
+                newAccountHeadline.getTheObject().setBackground(Color.DARK_GRAY);
+                newAccountHeadline.getTheObject().setForeground(Color.decode("#66d9ff"));
+
+                MyFrame<JLabel> usernameIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/user(1).png")));
+                // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                //"Icon made by Freepik from www.flaticon.com"
+                usernameIcon.getTheObject().setPreferredSize(new Dimension(32, 32));
+                usernameIcon.getTheObject().setBackground(Color.DARK_GRAY);
+                usernameIcon.getTheObject().setForeground(Color.gray);
+
+                MyFrame<JTextField> username = new MyFrame<JTextField>(new JTextField());
+                username.getTheObject().setPreferredSize(new Dimension(400, 50));
+                username.getTheObject().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#66d9ff")));
+                username.getTheObject().setBackground(Color.darkGray);
+                username.getTheObject().setForeground(Color.lightGray);
+                username.getTheObject().setHorizontalAlignment(JTextField.CENTER);
+
+                MyFrame<JLabel> usernameLabel = new MyFrame<JLabel>(new JLabel("Ime"));
+                usernameLabel.getTheObject().setPreferredSize(new Dimension(200, 50));
+                usernameLabel.getTheObject().setBackground(Color.DARK_GRAY);
+                usernameLabel.getTheObject().setForeground(Color.gray);
+
+                MyFrame<JLabel> passwordIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/padlock(1).png")));
+                //<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                //"Icon made by Pixel perfect from www.flaticon.com"
+                passwordIcon.getTheObject().setPreferredSize(new Dimension(32, 32));
+                passwordIcon.getTheObject().setBackground(Color.DARK_GRAY);
+                passwordIcon.getTheObject().setForeground(Color.gray);
+
+                MyFrame<JPasswordField> password = new MyFrame<JPasswordField>(new JPasswordField());
+                password.getTheObject().setPreferredSize(new Dimension(400, 50));
+                password.getTheObject().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#66d9ff")));
+                password.getTheObject().setBackground(Color.darkGray);
+                password.getTheObject().setForeground(Color.lightGray);
+                password.getTheObject().setHorizontalAlignment(JTextField.CENTER);
+
+                MyFrame<JLabel> paswordLabel = new MyFrame<JLabel>(new JLabel("Ime"));
+                paswordLabel.getTheObject().setPreferredSize(new Dimension(200, 50));
+                paswordLabel.getTheObject().setHorizontalAlignment(JLabel.CENTER);
+                paswordLabel.getTheObject().setBackground(Color.DARK_GRAY);
+                paswordLabel.getTheObject().setForeground(Color.gray);
+
+
+
+                MyFrame<JButton> cancelButton= new MyFrame<JButton>(new JButton("Odustani"));
+                cancelButton.getTheObject().setForeground(Color.decode("#66d9ff"));
+                cancelButton.getTheObject().setPreferredSize(new Dimension(200, 50));
+                cancelButton.getTheObject().setBackground(Color.darkGray);
+
+                MyFrame<JButton> createButon = new MyFrame<JButton>(new JButton("Kreiraj račun"));
+                createButon.getTheObject().setForeground(Color.decode("#66d9ff"));
+                createButon.getTheObject().setPreferredSize(new Dimension(200, 50));
+                createButon.getTheObject().setBackground(Color.darkGray);
+
+                JPanel createAccJPanel= new JPanel();
+                createAccJPanel.setPreferredSize(new Dimension(1280,768));
+                createAccJPanel.setLayout(new GridBagLayout());
+                createAccJPanel.setBackground(Color.darkGray);
+
+
+                GridBagConstraints gridBagConstraintsCreate= new GridBagConstraints();
+
+
+
+
+
+                gridBagConstraintsCreate.gridx=0;
+                gridBagConstraintsCreate.gridy=0;
+                gridBagConstraintsCreate.insets=new Insets(30, 0, 0,450);
+                createAccJPanel.add(usernameIcon.getTheObject(), gridBagConstraintsCreate);
+
+                gridBagConstraintsCreate.gridx=0;
+                gridBagConstraintsCreate.gridy=0;
+                gridBagConstraintsCreate.insets=new Insets(20, 10, 0,0);
+                createAccJPanel.add(username.getTheObject(), gridBagConstraintsCreate);
+
+                gridBagConstraintsCreate.gridx=0;
+                gridBagConstraintsCreate.gridy=1;
+                gridBagConstraintsCreate.insets=new Insets(30, 0, 0,450);
+                createAccJPanel.add(passwordIcon.getTheObject(), gridBagConstraintsCreate);
+
+                gridBagConstraintsCreate.gridx=0;
+                gridBagConstraintsCreate.gridy=1;
+                gridBagConstraintsCreate.insets=new Insets(20, 10, 0,0);
+                createAccJPanel.add(password.getTheObject(), gridBagConstraintsCreate);
+
+                gridBagConstraintsCreate.gridx=0;
+                gridBagConstraintsCreate.gridy=2;
+                gridBagConstraintsCreate.insets=new Insets(20, 0, 0,190);
+                createAccJPanel.add(cancelButton.getTheObject(), gridBagConstraintsCreate);
+
+                gridBagConstraintsCreate.gridx=0;
+                gridBagConstraintsCreate.gridy=2;
+                gridBagConstraintsCreate.insets=new Insets(20, 300, 0,0);
+                createAccJPanel.add(createButon.getTheObject(), gridBagConstraintsCreate);
+
+                JFrame createAccJFrame= new JFrame();
+                createAccJFrame.setPreferredSize(new Dimension(1280,768));
+                createAccJFrame.add(createAccJPanel);
+                createAccJFrame.setTitle("Kreiranje novog računa");
+                createAccJFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                createAccJFrame.pack();
+                createAccJFrame.setVisible(true);
+
+
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
 
     }
 
