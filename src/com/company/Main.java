@@ -24,7 +24,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 
-public class Main {
+public class Main implements Runnable{
 
 
 
@@ -2553,6 +2553,82 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                 createAccJFrame.setVisible(true);
 
 
+                createButon.getTheObject().addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        ConnectionHandler conHandler= new ConnectionHandler();
+                        String convertPassword=String.valueOf(password.getTheObject().getPassword());
+                        boolean occupied=false;
+                        try {
+                            Connection connection= conHandler.getCon("jdbc:mysql://localhost:3306/login", "root", "Arsenal2001-");
+                            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM users");
+                            ResultSet resultSet=preparedStatement.executeQuery();
+
+                            while (resultSet.next()){
+
+                                if (username.getTheObject().getText().equals(resultSet.getString("username"))&& convertPassword.equals(resultSet.getString("password"))){
+                                    occupied=true;
+
+
+                                   }
+                                   else {
+
+                                    occupied=false;
+
+
+
+
+                                }
+
+
+                            }
+                            if (occupied){
+                                defaultJLabelText.setText("Korisničko ime već postoji");
+                                defaultJDialog.setVisible(true);
+                                Thread newMainThread= new Thread(new Main());
+                                newMainThread.start();
+
+
+
+                            }else {
+                                preparedStatement=connection.prepareStatement("INSERT INTO users (username, password) VALUES ('" + username.getTheObject().getText() + "','" + convertPassword + "')");
+                                preparedStatement.executeUpdate();
+                                accountCreatedDialog();
+                                createAccJFrame.setVisible(false);
+
+
+                            }
+
+
+
+
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+                });
+
+
 
             }
 
@@ -2580,5 +2656,67 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
 
     }
 
+
+    public void run() {
+        //System.out.println("Hello from thread");
+        JDialog defaultJDialogW= new JDialog();
+        defaultJDialogW.setPreferredSize(new Dimension(600,400));
+        defaultJDialogW.setTitle("Upozorenje");
+        JPanel defaultJPanelW= new JPanel();
+        defaultJPanelW.setPreferredSize(new Dimension(600,400));
+        defaultJPanelW.setBackground(Color.darkGray);
+        defaultJPanelW.setLayout(new GridBagLayout());
+        ImageIcon warningIconW= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
+        JLabel defaultJLabelW=new JLabel(warningIconW);
+        JLabel defaultJLabelTextW= new JLabel("Unešena šifra je zauzeta");
+        defaultJLabelTextW.setForeground(Color.white);
+
+        GridBagConstraints constraintsW= new GridBagConstraints();
+
+        constraintsW.gridx=0;
+        constraintsW.gridy=0;
+        constraintsW.insets= new Insets(0, 0, 20, 0);
+        defaultJPanelW.add(defaultJLabelW, constraintsW);
+        constraintsW.gridx=0;
+        constraintsW.gridy=1;
+        defaultJPanelW.add(defaultJLabelTextW, constraintsW);
+        defaultJDialogW.add(defaultJPanelW);
+        defaultJDialogW.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        defaultJDialogW.pack();
+        defaultJDialogW.setVisible(true);
+
+
+
+
+    }
+    public static void accountCreatedDialog(){
+        JDialog defaultJDialogOk= new JDialog();
+        defaultJDialogOk.setPreferredSize(new Dimension(600,400));
+        defaultJDialogOk.setTitle("Korisnik kreiran");
+        JPanel defaultJPanelOk= new JPanel();
+        defaultJPanelOk.setPreferredSize(new Dimension(600,400));
+        defaultJPanelOk.setBackground(Color.darkGray);
+        defaultJPanelOk.setLayout(new GridBagLayout());
+        ImageIcon warningIconOk= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/checked.png");
+        JLabel defaultJLabelOk=new JLabel(warningIconOk);
+        JLabel defaultJLabelTextOk= new JLabel("Korisnik je uspješno kreiran, želimo Vam ugodno korištenje");
+        defaultJLabelTextOk.setForeground(Color.white);
+
+        GridBagConstraints constraintsOk= new GridBagConstraints();
+
+        constraintsOk.gridx=0;
+        constraintsOk.gridy=0;
+        constraintsOk.insets= new Insets(0, 0, 20, 0);
+        defaultJPanelOk.add(defaultJLabelOk, constraintsOk);
+        constraintsOk.gridx=0;
+        constraintsOk.gridy=1;
+        defaultJPanelOk.add(defaultJLabelTextOk, constraintsOk);
+        defaultJDialogOk.add(defaultJPanelOk);
+        defaultJDialogOk.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        defaultJDialogOk.pack();
+        defaultJDialogOk.setVisible(true);
+
+
+    }
 }
 
