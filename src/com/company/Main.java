@@ -4,11 +4,15 @@ package com.company;
 
 import com.toedter.calendar.JCalendar;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
 import java.sql.*;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -1563,8 +1567,20 @@ public class Main implements Runnable{
                     JPanel resPanel = new JPanel();
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/checked.png");
+                    JLabel jl= new JLabel(ii);
+                    resPanel.add(jl);
+
+
+
 
                     resPanel.add(jScrollPane);
+
+
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
@@ -1572,8 +1588,47 @@ public class Main implements Runnable{
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
+
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -2654,6 +2709,9 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
         });
 
 
+
+
+
     }
 
 
@@ -2718,5 +2776,6 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
 
 
     }
+
 }
 
