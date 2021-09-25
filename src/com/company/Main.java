@@ -738,6 +738,13 @@ public class Main implements Runnable{
         showButton.setPreferredSize(new Dimension(200, 50));
         showButton.setBackground(Color.darkGray);
 
+        //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        ImageIcon searchIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/search.png");
+        MyFrame<JLabel> searchIL = new MyFrame<>(new JLabel(searchIcon));
+        searchIL.getTheObject().setPreferredSize(new Dimension(250, 64));
+        searchIL.getTheObject().setHorizontalAlignment(JLabel.CENTER);
+        searchIL.getTheObject().setBackground(Color.DARK_GRAY);
+
         // Components for delete panel
 
         MyFrame<JTextField> searchForDeletion = new MyFrame<>(new JTextField());
@@ -747,7 +754,7 @@ public class Main implements Runnable{
         searchForDeletion.getTheObject().setForeground(Color.lightGray);
         searchForDeletion.getTheObject().setHorizontalAlignment(JTextField.CENTER);
 
-        MyFrame<JLabel> deleteLabel = new MyFrame<>(new JLabel("Brisanje prema id-u, imenu, prezimenu"));
+        MyFrame<JLabel> deleteLabel = new MyFrame<>(new JLabel("Molimo unesite ID podatka za brisanje"));
         deleteLabel.getTheObject().setPreferredSize(new Dimension(300, 50));
         deleteLabel.getTheObject().setHorizontalAlignment(JLabel.CENTER);
         deleteLabel.getTheObject().setBackground(Color.DARK_GRAY);
@@ -1033,52 +1040,64 @@ public class Main implements Runnable{
 
 
         // add to results panel
-
+        constraints.gridx = 2;
+        constraints.gridy = 0;
+        constraints.insets=new Insets(0,-200,50,0);
+        resultsPanel.getTheObject().add(searchIL.getTheObject(), constraints);
 
         constraints.gridx = 0;
-        constraints.gridy = 0;
-        // constraints.insets=new Insets(0,0,0,0);
+        constraints.gridy = 1;
+        constraints.insets=new Insets(0,0,0,0);
         resultsPanel.getTheObject().add(sortList.getTheObject(), constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 0;
-        //constraints.insets=new Insets(0,0,0,0);
+        constraints.gridy = 1;
+        constraints.insets=new Insets(0,50,0,0);
         resultsPanel.getTheObject().add(sortList1.getTheObject(), constraints);
 
         constraints.gridx = 2;
-        constraints.gridy = 0;
+        constraints.gridy = 1;
         //constraints.insets=new Insets(0,0,0,0);
         resultsPanel.getTheObject().add(searchData2.getTheObject(), constraints);
 
         constraints.gridx = 2;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         resultsPanel.getTheObject().add(searchLabel.getTheObject(), constraints);
 
         constraints.gridx = 3;
-        constraints.gridy = 0;
+        constraints.gridy = 1;
         //constraints.insets = new Insets(50, 50, 0, 0);
         resultsPanel.getTheObject().add(showButton, constraints);
 
         // add to delete panel
 
-        constraints.gridx=0;
-        constraints.gridy=0;
-        constraints.insets= new Insets(0,0,0,25);
-        deletePanel.getTheObject().add(traschCanIcon, constraints);
-
+        ImageIcon dI= new ImageIcon("src/com/company/delBig.png");
+        JLabel dJl= new JLabel(dI);
 
         constraints.gridx=1;
         constraints.gridy=0;
-        deletePanel.getTheObject().add(searchForDeletion.getTheObject(), constraints);
+        constraints.insets= new Insets(0,-610,50,25);
+        deletePanel.getTheObject().add(dJl, constraints);
 
-        constraints.gridx=2;
+       /* constraints.gridx=1;
         constraints.gridy=0;
-        constraints.insets= new Insets(0,25,0,0);
-        deletePanel.getTheObject().add(deleteButton, constraints);
+        constraints.insets= new Insets(0,0,0,25);
+        deletePanel.getTheObject().add(traschCanIcon, constraints);*/
+
+
+        constraints.gridx=0;
+        constraints.gridy=1;
+        constraints.insets= new Insets(0,230,0,0);
+        deletePanel.getTheObject().add(searchForDeletion.getTheObject(), constraints);
 
         constraints.gridx=1;
         constraints.gridy=1;
-        constraints.insets= new Insets(0,0,0,0);
+        constraints.insets= new Insets(0,25,0,0);
+        deletePanel.getTheObject().add(deleteButton, constraints);
+
+        constraints.gridx=0;
+        constraints.gridy=3;
+        constraints.insets= new Insets(0,230,0,0);
         deletePanel.getTheObject().add(deleteLabel.getTheObject(), constraints);
 
 
@@ -2653,10 +2672,14 @@ deleteButton.addMouseListener(new MouseListener() {
          jPanel.setBackground(Color.darkGray);
          jPanel.setLayout(gridBagLayout);
 
-        JLabel jLabel= new JLabel();
+         ImageIcon icon= new ImageIcon("src/com/company/deleteTrasch.png");
+         JLabel labelForIcon= new JLabel(icon);
+
+        JLabel jLabel= new JLabel("",SwingConstants.CENTER);
         jLabel.setPreferredSize(new Dimension(500,100));
         jLabel.setForeground(Color.white);
         jLabel.setBorder(BorderFactory.createMatteBorder(0,0,2,0, Color.decode("#66d9ff")));
+
 
 
         JButton no= new JButton("Odustani");
@@ -2671,31 +2694,58 @@ deleteButton.addMouseListener(new MouseListener() {
 
 
 
-
-
-        gridBagConstraints.gridx=1;
+        gridBagConstraints.gridx=0;
         gridBagConstraints.gridy=0;
+        gridBagConstraints.insets=new Insets(0,0,170,-500);
+        jPanel.add(labelForIcon, gridBagConstraints);
 
-        gridBagConstraints.insets=new Insets(20,50,0,0);
-
+        gridBagConstraints.gridx=0;
+        gridBagConstraints.gridy=1;
+        gridBagConstraints.insets=new Insets(20,0,-70,0);
         jPanel.add(jLabel, gridBagConstraints);
 
 
-        gridBagConstraints.gridx=0;
-        gridBagConstraints.gridy=1;
-        gridBagConstraints.insets=new Insets(20,0,0,160);
+        gridBagConstraints.gridx=1;
+        gridBagConstraints.gridy=2;
+        gridBagConstraints.insets=new Insets(-20,0,0,160);
         jPanel.add(no, gridBagConstraints);
 
 
-        gridBagConstraints.gridx=0;
-        gridBagConstraints.gridy=1;
-        gridBagConstraints.insets=new Insets(20,300,0,0);
+        gridBagConstraints.gridx=1;
+        gridBagConstraints.gridy=2;
+        gridBagConstraints.insets=new Insets(-20,300,0,0);
         jPanel.add(yes,gridBagConstraints);
 
         deleteDialog.add(jPanel);
         deleteDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         deleteDialog.pack();
         //deleteDialog.setVisible(false);
+
+
+        //////////////////////////////////////////////////////////////////////7
+        JDialog defaultJDialog= new JDialog();
+        defaultJDialog.setPreferredSize(new Dimension(600,400));
+        defaultJDialog.setTitle("Upozorenje");
+        JPanel defaultJPanel= new JPanel();
+        defaultJPanel.setPreferredSize(new Dimension(600,400));
+        defaultJPanel.setBackground(Color.darkGray);
+        defaultJPanel.setLayout(new GridBagLayout());
+        ImageIcon warningIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
+        JLabel defaultJLabel=new JLabel(warningIcon);
+        JLabel defaultJLabelText= new JLabel("Morate unijeti ID za brisanje");
+        defaultJLabelText.setForeground(Color.white);
+
+        constraints.gridx=0;
+        constraints.gridy=0;
+        constraints.insets= new Insets(0, 0, 20, 0);
+        defaultJPanel.add(defaultJLabel, constraints);
+        constraints.gridx=0;
+        constraints.gridy=1;
+        defaultJPanel.add(defaultJLabelText, constraints);
+        defaultJDialog.add(defaultJPanel);
+        defaultJDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        defaultJDialog.pack();
+        defaultJDialog.setVisible(false);
 
         if (!(searchForDeletion.getTheObject().getText().isEmpty())){
 
@@ -2788,7 +2838,9 @@ deleteButton.addMouseListener(new MouseListener() {
             deleteDialog1.add(jPanel1);
             deleteDialog1.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             deleteDialog1.pack();
-            deleteDialog1.setVisible(true);
+            //deleteDialog1.setVisible(true);
+            defaultJLabelText.setText("Morate unijeti vrijednost u polje za brisanje");
+            defaultJDialog.setVisible(true);
 
 
 
