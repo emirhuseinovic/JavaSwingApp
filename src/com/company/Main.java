@@ -26,6 +26,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.tabbedui.VerticalLayout;
 
 
 public class Main implements Runnable{
@@ -192,10 +193,10 @@ public class Main implements Runnable{
         resultsJFrame.getTheObject().setPreferredSize(new Dimension(1600, 900));
         resultsJFrame.getTheObject().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         resultsJFrame.getTheObject().setTitle("Rezultati");
-        //resultsJFrame.getTheObject().pack();
         resultsJFrame.getTheObject().setVisible(false);
 
-        JFrame RsFrame = new JFrame("Tabela");
+        JFrame RsFrame = new JFrame();
+        RsFrame.setTitle("Tabelarni prikaz podataka");
         RsFrame.setSize(new Dimension(1600, 900));
         RsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -257,6 +258,7 @@ public class Main implements Runnable{
         resultsPanel.getTheObject().setSize(new Dimension(1600, 900));
         resultsPanel.getTheObject().setBackground(Color.darkGray);
         resultsPanel.getTheObject().setLayout(new GridBagLayout());
+
 
         MyFrame<JPanel> deletePanel = new MyFrame<JPanel>(new JPanel());
         deletePanel.getTheObject().setSize(new Dimension(1600, 900));
@@ -1306,7 +1308,7 @@ public class Main implements Runnable{
                             localGBC.gridx = 1;
                             localGBC.gridy = 4;
                             localGBC.insets = new Insets(10, 0, 0, 0);
-                            //loginPanel.getTheObject().add(error.getTheObject(), localGBC);
+
                             defaultJLabelText.setText("Korisnicko ime ili šifra nisu tačni");
                             defaultJDialog.setVisible(true);
                         }
@@ -1533,7 +1535,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY surname ASC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -1561,19 +1563,28 @@ public class Main implements Runnable{
                     JTable jTable = new JTable(tableModel);
 
                     JScrollPane jScrollPane = new JScrollPane(jTable);
-                    jScrollPane.createHorizontalScrollBar();
-                    jScrollPane.createVerticalScrollBar();
+                    jScrollPane.setVerticalScrollBar(jScrollPane.createVerticalScrollBar());
+
 
                     JPanel resPanel = new JPanel();
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
-
-
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/checked.png");
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
                     resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
 
 
@@ -1584,7 +1595,7 @@ public class Main implements Runnable{
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
@@ -1646,7 +1657,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY surname DESC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -1681,16 +1692,67 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
+
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -1708,7 +1770,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY name ASC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -1738,21 +1800,72 @@ public class Main implements Runnable{
                     JScrollPane jScrollPane = new JScrollPane(jTable);
                     jScrollPane.createHorizontalScrollBar();
                     jScrollPane.createVerticalScrollBar();
-                    //JButton button = new JButton("Ime asc");
+
                     JPanel resPanel = new JPanel();
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
-                    //resPanel.add(button);
+
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -1770,7 +1883,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY name DESC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -1803,16 +1916,68 @@ public class Main implements Runnable{
                     JPanel resPanel = new JPanel();
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -1830,7 +1995,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY sum ASC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -1863,16 +2028,68 @@ public class Main implements Runnable{
                     JPanel resPanel = new JPanel();
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
+
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -1890,7 +2107,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY sum DESC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -1925,16 +2142,67 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -1952,7 +2220,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY id ASC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -1987,16 +2255,67 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -2014,7 +2333,7 @@ public class Main implements Runnable{
                     try {
                         PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY id DESC");
                         set = preparedStatement.executeQuery();
-                        //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -2049,16 +2368,67 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
 
@@ -2072,13 +2442,7 @@ public class Main implements Runnable{
                     JPanel jPanel= new JPanel(new GridBagLayout());
                     jPanel.setPreferredSize(new Dimension(250, 250));
                     jPanel.setBackground(Color.darkGray);
-                    //JLabel jLabel= new JLabel("Molimo izaberite filtere ili upišite traženi pojam");
-                    //jLabel.setPreferredSize(new Dimension(350, 50));
-                   // jLabel.setForeground(Color.decode("#cc0000"));
-                   // jPanel.add(jLabel);
-                    //jDialog.add(jPanel);
-                    //jDialog.pack();
-                    //jDialog.setVisible(true);
+
                     defaultJLabelText.setText("Molimo izaberite filtere ili upišite traženi pojam");
                     defaultJDialog.setVisible(true);
 
@@ -2137,16 +2501,67 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+                    resPanel.add(jl);
+                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
 
-                    JFrame jFrame = new JFrame();
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
                     jFrame.setPreferredSize(new Dimension(1600, 900));
                     jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     jFrame.add(resPanel);
                     jFrame.pack();
                     jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
 
 
                     searchData2.getTheObject().setText("");
