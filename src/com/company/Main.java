@@ -312,6 +312,12 @@ public class Main implements Runnable{
         labelBigPlus.getTheObject().setSize(new Dimension(64, 64));
         labelBigPlus.getTheObject().setToolTipText("Za unos novog podatka pritisnite na oznaku + ili bilo gdje na sivom pravougaoniku");
 
+        ImageIcon iconInfo = new ImageIcon("src/com/company/info.png");
+        //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        //"Icon made by Freepik from www.flaticon.com"
+        MyFrame<JLabel> iconInfoLabel = new MyFrame<JLabel>(new JLabel(iconInfo));
+        iconInfoLabel.getTheObject().setSize(new Dimension(32, 32));
+        iconInfoLabel.getTheObject().setToolTipText("Informacije o aplikaciji");
 
         // School year and date panel
         MyFrame<JLabel> schoolYearLabel = new MyFrame<JLabel>(new JLabel("Školska godina"));
@@ -1117,6 +1123,7 @@ public class Main implements Runnable{
         sidePanel.getTheObject().add(labelIconThree.getTheObject());
         sidePanel.getTheObject().add(labelIconTwo.getTheObject());
         sidePanel.getTheObject().add(labelIconStats.getTheObject());
+        sidePanel.getTheObject().add(iconInfoLabel.getTheObject());
         sidePanel.getTheObject().add(labelIconFour.getTheObject());
 
 
@@ -1321,7 +1328,7 @@ public class Main implements Runnable{
                             loginJFrame.getTheObject().setVisible(false);
                             obj.getTheObject().setVisible(true);
 
-                        } else {
+                        } if(!(set.getString("username").equals(usernameCred) && set.getString("password").equals(stringifyPassword))) {
                             System.out.println("Korisnicko ime ili šifra nisu tačni");
                             GridBagConstraints localGBC = new GridBagConstraints();
                             localGBC.gridx = 1;
@@ -2845,6 +2852,7 @@ deleteButton.addMouseListener(new MouseListener() {
 
 
         }
+
     }
 
     @Override
@@ -2866,7 +2874,13 @@ deleteButton.addMouseListener(new MouseListener() {
     public void mouseExited(MouseEvent e) {
 
     }
+
+
 });
+
+
+
+
 
 labelIconStats.getTheObject().addMouseListener(new MouseListener() {
     @Override
@@ -3175,7 +3189,49 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
             }
         });
 
+iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        JFrame infoFrame= new JFrame();
+        infoFrame.setPreferredSize(new Dimension(1280, 768));
+        JPanel infoPanel= new JPanel();
+        infoPanel.setPreferredSize(new Dimension(1280, 768));
+        BoxLayout boxLayout= new BoxLayout(infoPanel, BoxLayout.Y_AXIS);
+        infoPanel.setLayout(boxLayout);
 
+        JTextArea infoJLabel = new JTextArea("Aplikacija kodnog naziva Ventur je aplikacija najmjenjena Gimnazijama i Tehničkim školama, i " +
+                "služi za unos prijavljenih učenika za upis u srednju školu u vlastitu bazu podataka, kao i atomatsko računanje bodova i rangiranje učenika" +
+                ". Pored olakšavanje samog procesa bodovanja učenika, služi i kao svojevrsna evidencija svih prijavljenih i primjlenih učenika u prvi razred srednje škole." +
+                "Aplikacija omogućava i prikaz određenih statistikčih podataka, na osnovu kojih škola može imati bolji uvid zainteresovanost i broj upisanih učenika kroz određeni vremenski period.");
+
+        infoPanel.add(infoJLabel);
+        infoFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        infoFrame.add(infoPanel);
+        infoFrame.pack();
+        infoFrame.setVisible(true);
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+});
 
 
 
