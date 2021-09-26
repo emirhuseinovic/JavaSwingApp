@@ -8,9 +8,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
@@ -22,6 +25,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -1629,6 +1634,66 @@ public class Main implements Runnable{
                     jFrame.pack();
                     jFrame.setVisible(true);
 
+
+                    Workbook workbook=new XSSFWorkbook();
+                    Sheet sheet= workbook.createSheet("Resultati");
+
+
+
+
+                    File file= new File("/home/emir/Desktop/jtable.xlsx");
+
+
+
+
+                    try {
+                        FileOutputStream fileWriter= new FileOutputStream(file);
+                        for (int i=0; i<jTable.getRowCount();i++){
+                            Row rowHeader=sheet.createRow(0);
+                            rowHeader.createCell(0).setCellValue("id");
+                            rowHeader.createCell(1).setCellValue("Školska god.");
+                            rowHeader.createCell(2).setCellValue("Datum upisa");
+                            rowHeader.createCell(3).setCellValue("Ime");
+                            rowHeader.createCell(4).setCellValue("Ime oca");
+                            rowHeader.createCell(5).setCellValue("Prezime");
+                            rowHeader.createCell(6).setCellValue("Datum rođ.");
+                            rowHeader.createCell(7).setCellValue("Opšti uspj. VII");
+                            rowHeader.createCell(8).setCellValue("Opšti uspj. VIII");
+                            rowHeader.createCell(9).setCellValue("Opšti uspj. IX");
+                            rowHeader.createCell(10).setCellValue("Rel. pred. I (VIII)");
+                            rowHeader.createCell(11).setCellValue("Rel. pred. II (VIII)");
+                            rowHeader.createCell(12).setCellValue("Rel. pred. III (VIII)");
+                            rowHeader.createCell(13).setCellValue("Rel. pred. I (IX)");
+                            rowHeader.createCell(14).setCellValue("Rel. pred. II (IX)");
+                            rowHeader.createCell(15).setCellValue("Rel. pred. III (IX)");
+                            rowHeader.createCell(16).setCellValue("Međunarodno tak.");
+                            rowHeader.createCell(17).setCellValue("Federalno tak.");
+                            rowHeader.createCell(18).setCellValue("Kantonalno tak.");
+                            rowHeader.createCell(19).setCellValue("Posebna dipl.");
+                            rowHeader.createCell(20).setCellValue("Eksterna mat.");
+                            rowHeader.createCell(21).setCellValue("Broj bodova.");
+
+
+
+                            Row row= sheet.createRow(i);
+                            for (int j=0;j<jTable.getColumnCount();j++){
+                                Cell cell= row.createCell(j);
+                                cell.setCellValue(jTable.getValueAt(i,j).toString());
+
+
+
+
+                            }
+                        }
+                        workbook.write(fileWriter);
+                        workbook.close();
+
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+
                     jl.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -3194,17 +3259,16 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
     public void mouseClicked(MouseEvent e) {
         JFrame infoFrame= new JFrame();
         infoFrame.setPreferredSize(new Dimension(1280, 768));
+        infoFrame.setTitle("Informacije o aplikaciji");
         JPanel infoPanel= new JPanel();
         infoPanel.setPreferredSize(new Dimension(1280, 768));
+        infoPanel.setBackground(Color.darkGray);
         BoxLayout boxLayout= new BoxLayout(infoPanel, BoxLayout.Y_AXIS);
         infoPanel.setLayout(boxLayout);
 
-        JTextArea infoJLabel = new JTextArea("Aplikacija kodnog naziva Ventur je aplikacija najmjenjena Gimnazijama i Tehničkim školama, i " +
-                "služi za unos prijavljenih učenika za upis u srednju školu u vlastitu bazu podataka, kao i atomatsko računanje bodova i rangiranje učenika" +
-                ". Pored olakšavanje samog procesa bodovanja učenika, služi i kao svojevrsna evidencija svih prijavljenih i primjlenih učenika u prvi razred srednje škole." +
-                "Aplikacija omogućava i prikaz određenih statistikčih podataka, na osnovu kojih škola može imati bolji uvid zainteresovanost i broj upisanih učenika kroz određeni vremenski period.");
 
-        infoPanel.add(infoJLabel);
+
+
         infoFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         infoFrame.add(infoPanel);
         infoFrame.pack();
