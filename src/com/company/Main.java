@@ -1763,6 +1763,35 @@ public class Main implements Runnable{
                         }
                     });
 
+                   jlO.addMouseListener(new MouseListener() {
+                       @Override
+                       public void mouseClicked(MouseEvent e) {
+                           saveTable(jTable,RsFrame);
+
+
+                       }
+
+                       @Override
+                       public void mousePressed(MouseEvent e) {
+
+                       }
+
+                       @Override
+                       public void mouseReleased(MouseEvent e) {
+
+                       }
+
+                       @Override
+                       public void mouseEntered(MouseEvent e) {
+
+                       }
+
+                       @Override
+                       public void mouseExited(MouseEvent e) {
+
+                       }
+                   });
+
 
 
                 }
@@ -1873,6 +1902,32 @@ public class Main implements Runnable{
                                 ex.printStackTrace();
 
                             }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable,RsFrame);
                         }
 
                         @Override
@@ -2027,6 +2082,33 @@ public class Main implements Runnable{
 
                         }
                     });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable,RsFrame);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+
 
 
 
@@ -2159,6 +2241,34 @@ public class Main implements Runnable{
                         }
                     });
 
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable, RsFrame);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+
+
 
 
                 }
@@ -2268,6 +2378,32 @@ public class Main implements Runnable{
                                 ex.printStackTrace();
 
                             }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable, RsFrame);
                         }
 
                         @Override
@@ -2424,6 +2560,33 @@ public class Main implements Runnable{
                         }
                     });
 
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable, RsFrame);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+
 
 
                 }
@@ -2534,6 +2697,32 @@ public class Main implements Runnable{
                                 ex.printStackTrace();
 
                             }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable, RsFrame);
                         }
 
                         @Override
@@ -2689,6 +2878,34 @@ public class Main implements Runnable{
 
                         }
                     });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable,RsFrame);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+
+
 
 
 
@@ -2820,6 +3037,32 @@ public class Main implements Runnable{
                                 ex.printStackTrace();
 
                             }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable, RsFrame);
                         }
 
                         @Override
@@ -3489,7 +3732,70 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
 
 
     }
-    public void saveTable(JTable jTable,JFrame RsFrame){
+
+
+    public void run() {
+        //System.out.println("Hello from thread");
+        JDialog defaultJDialogW= new JDialog();
+        defaultJDialogW.setPreferredSize(new Dimension(600,400));
+        defaultJDialogW.setTitle("Upozorenje");
+        JPanel defaultJPanelW= new JPanel();
+        defaultJPanelW.setPreferredSize(new Dimension(600,400));
+        defaultJPanelW.setBackground(Color.darkGray);
+        defaultJPanelW.setLayout(new GridBagLayout());
+        ImageIcon warningIconW= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
+        JLabel defaultJLabelW=new JLabel(warningIconW);
+        JLabel defaultJLabelTextW= new JLabel("Unešena šifra je zauzeta");
+        defaultJLabelTextW.setForeground(Color.white);
+
+        GridBagConstraints constraintsW= new GridBagConstraints();
+
+        constraintsW.gridx=0;
+        constraintsW.gridy=0;
+        constraintsW.insets= new Insets(0, 0, 20, 0);
+        defaultJPanelW.add(defaultJLabelW, constraintsW);
+        constraintsW.gridx=0;
+        constraintsW.gridy=1;
+        defaultJPanelW.add(defaultJLabelTextW, constraintsW);
+        defaultJDialogW.add(defaultJPanelW);
+        defaultJDialogW.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        defaultJDialogW.pack();
+        defaultJDialogW.setVisible(true);
+
+
+
+
+    }
+    public static void accountCreatedDialog(){
+        JDialog defaultJDialogOk= new JDialog();
+        defaultJDialogOk.setPreferredSize(new Dimension(600,400));
+        defaultJDialogOk.setTitle("Korisnik kreiran");
+        JPanel defaultJPanelOk= new JPanel();
+        defaultJPanelOk.setPreferredSize(new Dimension(600,400));
+        defaultJPanelOk.setBackground(Color.darkGray);
+        defaultJPanelOk.setLayout(new GridBagLayout());
+        ImageIcon warningIconOk= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/checked.png");
+        JLabel defaultJLabelOk=new JLabel(warningIconOk);
+        JLabel defaultJLabelTextOk= new JLabel("Korisnik je uspješno kreiran, želimo Vam ugodno korištenje");
+        defaultJLabelTextOk.setForeground(Color.white);
+
+        GridBagConstraints constraintsOk= new GridBagConstraints();
+
+        constraintsOk.gridx=0;
+        constraintsOk.gridy=0;
+        constraintsOk.insets= new Insets(0, 0, 20, 0);
+        defaultJPanelOk.add(defaultJLabelOk, constraintsOk);
+        constraintsOk.gridx=0;
+        constraintsOk.gridy=1;
+        defaultJPanelOk.add(defaultJLabelTextOk, constraintsOk);
+        defaultJDialogOk.add(defaultJPanelOk);
+        defaultJDialogOk.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        defaultJDialogOk.pack();
+        defaultJDialogOk.setVisible(true);
+
+
+    }
+    public static void saveTable(JTable jTable,JFrame RsFrame){
         Workbook workbook=new XSSFWorkbook();
         Sheet sheet= workbook.createSheet("Resultati");
 
@@ -3561,68 +3867,6 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
 
     }
 
-
-    public void run() {
-        //System.out.println("Hello from thread");
-        JDialog defaultJDialogW= new JDialog();
-        defaultJDialogW.setPreferredSize(new Dimension(600,400));
-        defaultJDialogW.setTitle("Upozorenje");
-        JPanel defaultJPanelW= new JPanel();
-        defaultJPanelW.setPreferredSize(new Dimension(600,400));
-        defaultJPanelW.setBackground(Color.darkGray);
-        defaultJPanelW.setLayout(new GridBagLayout());
-        ImageIcon warningIconW= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
-        JLabel defaultJLabelW=new JLabel(warningIconW);
-        JLabel defaultJLabelTextW= new JLabel("Unešena šifra je zauzeta");
-        defaultJLabelTextW.setForeground(Color.white);
-
-        GridBagConstraints constraintsW= new GridBagConstraints();
-
-        constraintsW.gridx=0;
-        constraintsW.gridy=0;
-        constraintsW.insets= new Insets(0, 0, 20, 0);
-        defaultJPanelW.add(defaultJLabelW, constraintsW);
-        constraintsW.gridx=0;
-        constraintsW.gridy=1;
-        defaultJPanelW.add(defaultJLabelTextW, constraintsW);
-        defaultJDialogW.add(defaultJPanelW);
-        defaultJDialogW.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        defaultJDialogW.pack();
-        defaultJDialogW.setVisible(true);
-
-
-
-
-    }
-    public static void accountCreatedDialog(){
-        JDialog defaultJDialogOk= new JDialog();
-        defaultJDialogOk.setPreferredSize(new Dimension(600,400));
-        defaultJDialogOk.setTitle("Korisnik kreiran");
-        JPanel defaultJPanelOk= new JPanel();
-        defaultJPanelOk.setPreferredSize(new Dimension(600,400));
-        defaultJPanelOk.setBackground(Color.darkGray);
-        defaultJPanelOk.setLayout(new GridBagLayout());
-        ImageIcon warningIconOk= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/checked.png");
-        JLabel defaultJLabelOk=new JLabel(warningIconOk);
-        JLabel defaultJLabelTextOk= new JLabel("Korisnik je uspješno kreiran, želimo Vam ugodno korištenje");
-        defaultJLabelTextOk.setForeground(Color.white);
-
-        GridBagConstraints constraintsOk= new GridBagConstraints();
-
-        constraintsOk.gridx=0;
-        constraintsOk.gridy=0;
-        constraintsOk.insets= new Insets(0, 0, 20, 0);
-        defaultJPanelOk.add(defaultJLabelOk, constraintsOk);
-        constraintsOk.gridx=0;
-        constraintsOk.gridy=1;
-        defaultJPanelOk.add(defaultJLabelTextOk, constraintsOk);
-        defaultJDialogOk.add(defaultJPanelOk);
-        defaultJDialogOk.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        defaultJDialogOk.pack();
-        defaultJDialogOk.setVisible(true);
-
-
-    }
 
 
 
