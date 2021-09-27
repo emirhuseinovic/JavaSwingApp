@@ -1604,23 +1604,41 @@ public class Main implements Runnable{
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
+
+                    resPanelSide.add(jl);
                     jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
 
 
 
 
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
+
 
 
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
@@ -1635,65 +1653,78 @@ public class Main implements Runnable{
                     jFrame.setVisible(true);
 
 
+                    /*
+
                     Workbook workbook=new XSSFWorkbook();
                     Sheet sheet= workbook.createSheet("Resultati");
 
 
 
 
-                    File file= new File("/home/emir/Desktop/jtable.xlsx");
+                    File file= new File("/home/emir/Desktop/");
+                    JFileChooser fileChooser= new JFileChooser();
+                    //fileChooser.setCurrentDirectory(file);
 
 
 
 
-                    try {
-                        FileOutputStream fileWriter= new FileOutputStream(file);
-                        for (int i=0; i<jTable.getRowCount();i++){
-                            Row rowHeader=sheet.createRow(0);
-                            rowHeader.createCell(0).setCellValue("id");
-                            rowHeader.createCell(1).setCellValue("Školska god.");
-                            rowHeader.createCell(2).setCellValue("Datum upisa");
-                            rowHeader.createCell(3).setCellValue("Ime");
-                            rowHeader.createCell(4).setCellValue("Ime oca");
-                            rowHeader.createCell(5).setCellValue("Prezime");
-                            rowHeader.createCell(6).setCellValue("Datum rođ.");
-                            rowHeader.createCell(7).setCellValue("Opšti uspj. VII");
-                            rowHeader.createCell(8).setCellValue("Opšti uspj. VIII");
-                            rowHeader.createCell(9).setCellValue("Opšti uspj. IX");
-                            rowHeader.createCell(10).setCellValue("Rel. pred. I (VIII)");
-                            rowHeader.createCell(11).setCellValue("Rel. pred. II (VIII)");
-                            rowHeader.createCell(12).setCellValue("Rel. pred. III (VIII)");
-                            rowHeader.createCell(13).setCellValue("Rel. pred. I (IX)");
-                            rowHeader.createCell(14).setCellValue("Rel. pred. II (IX)");
-                            rowHeader.createCell(15).setCellValue("Rel. pred. III (IX)");
-                            rowHeader.createCell(16).setCellValue("Međunarodno tak.");
-                            rowHeader.createCell(17).setCellValue("Federalno tak.");
-                            rowHeader.createCell(18).setCellValue("Kantonalno tak.");
-                            rowHeader.createCell(19).setCellValue("Posebna dipl.");
-                            rowHeader.createCell(20).setCellValue("Eksterna mat.");
-                            rowHeader.createCell(21).setCellValue("Broj bodova.");
+                      Row rowHeader=sheet.createRow(0);
+                      rowHeader.createCell(0).setCellValue("id");
+                      rowHeader.createCell(1).setCellValue("Školska god.");
+                      rowHeader.createCell(2).setCellValue("Datum upisa");
+                      rowHeader.createCell(3).setCellValue("Ime");
+                      rowHeader.createCell(4).setCellValue("Ime oca");
+                      rowHeader.createCell(5).setCellValue("Prezime");
+                      rowHeader.createCell(6).setCellValue("Datum rođ.");
+                      rowHeader.createCell(7).setCellValue("Opšti uspj. VII");
+                      rowHeader.createCell(8).setCellValue("Opšti uspj. VIII");
+                      rowHeader.createCell(9).setCellValue("Opšti uspj. IX");
+                      rowHeader.createCell(10).setCellValue("Rel. pred. I (VIII)");
+                      rowHeader.createCell(11).setCellValue("Rel. pred. II (VIII)");
+                      rowHeader.createCell(12).setCellValue("Rel. pred. III (VIII)");
+                      rowHeader.createCell(13).setCellValue("Rel. pred. I (IX)");
+                      rowHeader.createCell(14).setCellValue("Rel. pred. II (IX)");
+                      rowHeader.createCell(15).setCellValue("Rel. pred. III (IX)");
+                      rowHeader.createCell(16).setCellValue("Međunarodno tak.");
+                      rowHeader.createCell(17).setCellValue("Federalno tak.");
+                      rowHeader.createCell(18).setCellValue("Kantonalno tak.");
+                      rowHeader.createCell(19).setCellValue("Posebna dipl.");
+                      rowHeader.createCell(20).setCellValue("Eksterna mat.");
+                      rowHeader.createCell(21).setCellValue("Broj bodova.");
+
+                    FileOutputStream fileOutputStream= new FileOutputStream(file);
+                    for (int i=0; i<jTable.getRowCount();i++){
 
 
 
-                            Row row= sheet.createRow(i);
-                            for (int j=0;j<jTable.getColumnCount();j++){
-                                Cell cell= row.createCell(j);
-                                cell.setCellValue(jTable.getValueAt(i,j).toString());
+                        Row row= sheet.createRow(i);
+                        for (int j=0;j<jTable.getColumnCount();j++){
+                            Cell cell= row.createCell(j);
+                            cell.setCellValue(jTable.getValueAt(i,j).toString());
 
 
 
 
-                            }
                         }
-                        workbook.write(fileWriter);
-                        workbook.close();
-
-
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
                     }
+                    int returnValue=fileChooser.showSaveDialog(RsFrame);
+
+                    if (returnValue==JFileChooser.APPROVE_OPTION){
+
+                       File file1=new File(fileChooser.getSelectedFile().getAbsolutePath());
 
 
+                        try {
+                            workbook.write(new FileOutputStream(file1));
+                            workbook.close();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    workbook.write(fileOutputStream);
+                      workbook.close();
+
+*/
                     jl.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -1784,19 +1815,39 @@ public class Main implements Runnable{
                     resPanel.setBackground(Color.darkGray);
 
 
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
-                    jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -1895,20 +1946,39 @@ public class Main implements Runnable{
                     JPanel resPanel = new JPanel();
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
-
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
-                    jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -2007,20 +2077,39 @@ public class Main implements Runnable{
                     JPanel resPanel = new JPanel();
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
+
+                    resPanelSide.add(jl);
                     jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
 
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -2120,19 +2209,39 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
-                    jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -2233,19 +2342,39 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
-                    jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -2346,19 +2475,39 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
-                    jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -2459,19 +2608,39 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
-                    jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -2592,19 +2761,39 @@ public class Main implements Runnable{
                     resPanel.setPreferredSize(new Dimension(1600,900));
                     resPanel.setBackground(Color.darkGray);
 
-                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.Y_AXIS);
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
                     resPanel.setLayout(boxLayout);
                     resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                     ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
-                    jl.setToolTipText("Pritisnite za printanje dokumenta");
-                    resPanel.add(jl);
-                    jl.setAlignmentX(Box.CENTER_ALIGNMENT);
-                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
 
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
                     resPanel.add(jScrollPane);
                     jScrollPane.setPreferredSize(new Dimension(1600, 900));
 
@@ -3300,6 +3489,77 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
 
 
     }
+    public void saveTable(JTable jTable,JFrame RsFrame){
+        Workbook workbook=new XSSFWorkbook();
+        Sheet sheet= workbook.createSheet("Resultati");
+
+
+
+
+        File file= new File("/home/emir/Desktop/");
+        JFileChooser fileChooser= new JFileChooser();
+        //fileChooser.setCurrentDirectory(file);
+
+
+
+
+                    /*  Row rowHeader=sheet.createRow(0);
+                      rowHeader.createCell(0).setCellValue("id");
+                      rowHeader.createCell(1).setCellValue("Školska god.");
+                      rowHeader.createCell(2).setCellValue("Datum upisa");
+                      rowHeader.createCell(3).setCellValue("Ime");
+                      rowHeader.createCell(4).setCellValue("Ime oca");
+                      rowHeader.createCell(5).setCellValue("Prezime");
+                      rowHeader.createCell(6).setCellValue("Datum rođ.");
+                      rowHeader.createCell(7).setCellValue("Opšti uspj. VII");
+                      rowHeader.createCell(8).setCellValue("Opšti uspj. VIII");
+                      rowHeader.createCell(9).setCellValue("Opšti uspj. IX");
+                      rowHeader.createCell(10).setCellValue("Rel. pred. I (VIII)");
+                      rowHeader.createCell(11).setCellValue("Rel. pred. II (VIII)");
+                      rowHeader.createCell(12).setCellValue("Rel. pred. III (VIII)");
+                      rowHeader.createCell(13).setCellValue("Rel. pred. I (IX)");
+                      rowHeader.createCell(14).setCellValue("Rel. pred. II (IX)");
+                      rowHeader.createCell(15).setCellValue("Rel. pred. III (IX)");
+                      rowHeader.createCell(16).setCellValue("Međunarodno tak.");
+                      rowHeader.createCell(17).setCellValue("Federalno tak.");
+                      rowHeader.createCell(18).setCellValue("Kantonalno tak.");
+                      rowHeader.createCell(19).setCellValue("Posebna dipl.");
+                      rowHeader.createCell(20).setCellValue("Eksterna mat.");
+                      rowHeader.createCell(21).setCellValue("Broj bodova.");*/
+
+        //FileOutputStream fileOutputStream= new FileOutputStream(file);
+        for (int i=0; i<jTable.getRowCount();i++){
+
+
+
+            Row row= sheet.createRow(i);
+            for (int j=0;j<jTable.getColumnCount();j++){
+                Cell cell= row.createCell(j);
+                cell.setCellValue(jTable.getValueAt(i,j).toString());
+
+
+
+
+            }
+        }
+        int returnValue=fileChooser.showSaveDialog(RsFrame);
+
+        if (returnValue==JFileChooser.APPROVE_OPTION){
+
+            File file1=new File(fileChooser.getSelectedFile().getAbsolutePath());
+
+
+            try {
+                workbook.write(new FileOutputStream(file1));
+                workbook.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        //workbook.write(fileOutputStream);
+        //  workbook.close();
+
+    }
 
 
     public void run() {
@@ -3363,6 +3623,8 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
 
 
     }
+
+
 
 }
 
