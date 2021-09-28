@@ -30,7 +30,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.Dataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.DefaultHighLowDataset;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 
@@ -358,6 +362,19 @@ public class Main implements Runnable{
         calendarIconLabel.setPreferredSize(new Dimension(32, 32));
         // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         // "Icon made by Freepik from www.flaticon.com"
+
+
+        MyFrame<JLabel> directionLabel = new MyFrame<JLabel>(new JLabel("Smjer"));
+         directionLabel.getTheObject().setPreferredSize(new Dimension(200, 50));
+        directionLabel.getTheObject().setForeground(Color.gray);
+        directionLabel.getTheObject().setHorizontalAlignment(JLabel.CENTER);
+
+        String[] directionList = {"Opšta gimnazija", "IT gimnazija"};
+        MyFrame<JComboBox> directionData = new MyFrame<JComboBox>(new JComboBox(directionList));
+        directionData.getTheObject().setPreferredSize(new Dimension(400, 50));
+        directionData.getTheObject().setBackground(Color.darkGray);
+        directionData.getTheObject().setForeground(Color.white);
+        directionData.getTheObject().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#66d9ff")));
 
 
         // Components for plusPanelTwo
@@ -855,17 +872,26 @@ public class Main implements Runnable{
         constraints.gridy = 1;
         plusPanel.getTheObject().add(schoolYearLabel.getTheObject(), constraints);
 
-
         constraints.gridx = 0;
         constraints.gridy = 2;
-        plusPanel.getTheObject().add(jCalendar.getTheObject(), constraints);
+        plusPanel.getTheObject().add(directionData.getTheObject(), constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
-        plusPanel.getTheObject().add(currentDateLabel.getTheObject(), constraints);
+        plusPanel.getTheObject().add(directionLabel.getTheObject(), constraints);
+
+
 
         constraints.gridx = 0;
         constraints.gridy = 4;
+        plusPanel.getTheObject().add(jCalendar.getTheObject(), constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+        plusPanel.getTheObject().add(currentDateLabel.getTheObject(), constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 6;
         constraints.insets = new Insets(0, 650, 0, 0);
         plusPanel.getTheObject().add(nextButton.getTheObject(), constraints);
 
@@ -1090,10 +1116,6 @@ public class Main implements Runnable{
         constraints.insets= new Insets(0,-610,50,25);
         deletePanel.getTheObject().add(dJl, constraints);
 
-       /* constraints.gridx=1;
-        constraints.gridy=0;
-        constraints.insets= new Insets(0,0,0,25);
-        deletePanel.getTheObject().add(traschCanIcon, constraints);*/
 
 
         constraints.gridx=0;
@@ -1110,11 +1132,6 @@ public class Main implements Runnable{
         constraints.gridy=3;
         constraints.insets= new Insets(0,230,0,0);
         deletePanel.getTheObject().add(deleteLabel.getTheObject(), constraints);
-
-
-
-
-
 
 
 
@@ -1389,6 +1406,7 @@ public class Main implements Runnable{
 
 
                     String schoolYear = (String) schoolYearsListData.getTheObject().getSelectedItem();
+                    String direction = (String) directionData.getTheObject().getSelectedItem();
 
                     Date jcalValue = jCalendar.getTheObject().getDate();
                     LocalDateTime currentDates = convertDate(jcalValue);
@@ -3382,19 +3400,41 @@ deleteButton.addMouseListener(new MouseListener() {
 labelIconStats.getTheObject().addMouseListener(new MouseListener() {
     @Override
     public void mouseClicked(MouseEvent e) {
-        DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
+       /* DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
+        DefaultCategoryDataset defaultCategoryDataset= new DefaultCategoryDataset();
+        defaultCategoryDataset.setValue(30.0, "IT Gimnazija", "2020/2021");
+        defaultCategoryDataset.setValue(30.0, "IT Gimnazija", "2021/2022");
+        defaultCategoryDataset.setValue(40.0, "IT Gimnazija", "2022/2022");
+        defaultCategoryDataset.setValue(10.0, "IT Gimnazija", "2023/2024");
+        defaultCategoryDataset.setValue(60.0, "IT Gimnazija", "2024/2025");
+
+        defaultCategoryDataset.setValue(10.0, "Opšta Gimnazija", "2020/2021");
+        defaultCategoryDataset.setValue(20.0, "Opšta Gimnazija", "2021/2022");
+        defaultCategoryDataset.setValue(80.0, "Opšta Gimnazija", "2022/2022");
+        defaultCategoryDataset.setValue(30.0, "Opšta Gimnazija", "2023/2024");
+        defaultCategoryDataset.setValue(20.0, "Opšta Gimnazija", "2024/2025");
+*/
        // defaultPieDataset.setValue("value", 30);
        // defaultPieDataset.setValue("value2", 45);
-        JFreeChart chart= ChartFactory.createPieChart3D("Procenat primljenih učenika", defaultPieDataset, true, true, false);
+       // JFreeChart chart= ChartFactory.createPieChart3D("Procenat primljenih učenika", defaultPieDataset, true, true, false);
+        /////////////////////////////////////////////////////
+      //  JFreeChart chart1=ChartFactory.createLineChart("Boj upisanih učenika kroz petogodišnji period", "Školske godine", "Broj upisanih učenika",defaultCategoryDataset, PlotOrientation.VERTICAL,
+             //   true,true,false);
 
+        ////////////////////////////////////////////////////
         JFrame chartJFrame= new JFrame();
         chartJFrame.setPreferredSize(new Dimension(800,500));
-        ChartPanel chartPanel= new ChartPanel(chart);
-        chartJFrame.add(chartPanel);
+       // ChartPanel chartPanel= new ChartPanel(chart);
+        //ChartPanel chartPanel1= new ChartPanel(chart1);
+
+       // chartJFrame.add(chartPanel);
+        //chartJFrame.add(chartPanel1);
+
+
         chartJFrame.pack();
        // chartJFrame.setVisible(true);
 
-        ConnectionHandler conHand= new ConnectionHandler();
+      /*  ConnectionHandler conHand= new ConnectionHandler();
 
         try {
             PreparedStatement sTmT= conHand.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-" ).prepareStatement("SELECT sum FROM info WHERE sum>54");
@@ -3421,7 +3461,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+*/
         chartJFrame.setVisible(true);
     }
 
@@ -3692,11 +3732,19 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
         JFrame infoFrame= new JFrame();
         infoFrame.setPreferredSize(new Dimension(1280, 768));
         infoFrame.setTitle("Informacije o aplikaciji");
+
         JPanel infoPanel= new JPanel();
         infoPanel.setPreferredSize(new Dimension(1280, 768));
-        infoPanel.setBackground(Color.darkGray);
         BoxLayout boxLayout= new BoxLayout(infoPanel, BoxLayout.Y_AXIS);
         infoPanel.setLayout(boxLayout);
+
+        ImageIcon image= new ImageIcon("src/com/company/ventus.png");
+        JLabel jInfoLabel= new JLabel(image);
+        jInfoLabel.setPreferredSize(new Dimension(1280,768));
+        JScrollPane jScrollPane= new JScrollPane(jInfoLabel);
+        jScrollPane.setPreferredSize(new Dimension(1280,768));
+
+        infoPanel.add(jScrollPane);
 
 
 
