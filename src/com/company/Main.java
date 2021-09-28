@@ -1525,7 +1525,7 @@ public class Main implements Runnable{
 
 
                     //String q=String.format(Locale.US, "INSERT INTO info(schoolYear, entryDate, name, fatherName, surname, dob, gs7, gs8, gs9, relSubj18, relSubj28, relSubj38, relSubj19, relSubj29, relSubj39, iC, fC, cC, sD) VALUES ('"+schoolYear+"','"+stringify+"','"+student+"', '"+father+"', '"+studentLastname+"','"+stringifyDob+"', '"+generalVII+"','"+generalVIII+"','"+generalIX+"', '"+relSubj1+"', '"+relSubj2+"','"+relSubj3+"','"+relSubj4+"', '"+relSubj5+"', '"+relSubj6+"', '"+internationalC+"','"+federalC+"', '"+cantonalC+"','"+specialD+"')",123456789);
-                    String insertQuery = "INSERT INTO info(schoolYear, entryDate, name, fatherName, surname, dob, gs7, gs8, gs9, relSubj18, relSubj28, relSubj38, relSubj19, relSubj29, relSubj39, iC, fC, cC, sD, ex, sum) VALUES ('" + schoolYear + "','" + stringify + "','" + student + "', '" + father + "', '" + studentLastname + "','" + stringifyDob + "', '" + generalVII + "','" + generalVIII + "','" + generalIX + "', '" + dsb1 + "' , '" + dsb2 + "','" + dsb3 + "','" + dsb4 + "', '" + dsb5 + "', '" + dsb6 + "', '" + intC + "','" + fedC + "', '" + canC + "','" + speC + "','" + extString + "', '" + sumSumare + "')";
+                    String insertQuery = "INSERT INTO info(schoolYear, direction, entryDate, name, fatherName, surname, dob, gs7, gs8, gs9, relSubj18, relSubj28, relSubj38, relSubj19, relSubj29, relSubj39, iC, fC, cC, sD, ex, sum) VALUES ('" + schoolYear + "','" + direction + "','" + stringify + "','" + student + "', '" + father + "', '" + studentLastname + "','" + stringifyDob + "', '" + generalVII + "','" + generalVIII + "','" + generalIX + "', '" + dsb1 + "' , '" + dsb2 + "','" + dsb3 + "','" + dsb4 + "', '" + dsb5 + "', '" + dsb6 + "', '" + intC + "','" + fedC + "', '" + canC + "','" + speC + "','" + extString + "', '" + sumSumare + "')";
                     connectionHandler.connectAndCrud(insertQuery);
                 }
                 //create table info (id int not null auto_increment primary key, schoolYear varchar (256) not null, entryDate varchar (256) not null, name varchar (256) not null, fatherName varchar (256) not null, surname varchar (256) not null, dob varchar (256) not null, gs7 double not null, gs8 double not null, gs9 double not null, relSubj18 double not null, relSubj28 double not null, relSubj38 double not null, relSubj19 double not null, relSubj29 double not null, relSubj39 double not null, iC varchar(256) not null, fC varchar(256) not null, cC varchar(256) not null, sD varchar(256) not null, ex double not null, sum double not null);
@@ -1573,7 +1573,7 @@ public class Main implements Runnable{
                 //////////////////////////////////////////////////////////////////////////////////////////////
 
                 if (sortList.getTheObject().getSelectedItem().equals("Prezime") && sortList1.getTheObject().getSelectedItem().equals("ASC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG", "Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -1593,7 +1593,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -1815,7 +1815,7 @@ public class Main implements Runnable{
                 }
 
                 if (sortList.getTheObject().getSelectedItem().equals("Prezime") && sortList1.getTheObject().getSelectedItem().equals("DESC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -1835,7 +1835,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -1974,7 +1974,7 @@ public class Main implements Runnable{
                 }
 
                 if (sortList.getTheObject().getSelectedItem().equals("Ime") && sortList1.getTheObject().getSelectedItem().equals("ASC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -1994,7 +1994,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -2133,7 +2133,7 @@ public class Main implements Runnable{
                 }
 
                 if (sortList.getTheObject().getSelectedItem().equals("Ime") && sortList1.getTheObject().getSelectedItem().equals("DESC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -2153,7 +2153,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -2292,7 +2292,7 @@ public class Main implements Runnable{
                 }
 
                 if (sortList.getTheObject().getSelectedItem().equals("Bodovi") && sortList1.getTheObject().getSelectedItem().equals("ASC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -2312,7 +2312,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -2450,7 +2450,7 @@ public class Main implements Runnable{
                 }
 
                 if (sortList.getTheObject().getSelectedItem().equals("Bodovi") && sortList1.getTheObject().getSelectedItem().equals("DESC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG", "Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -2470,7 +2470,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -2610,7 +2610,7 @@ public class Main implements Runnable{
                 }
 
                 if (sortList.getTheObject().getSelectedItem().equals("id") && sortList1.getTheObject().getSelectedItem().equals("ASC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -2630,7 +2630,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -2769,7 +2769,7 @@ public class Main implements Runnable{
                 }
 
                 if (sortList.getTheObject().getSelectedItem().equals("id") && sortList1.getTheObject().getSelectedItem().equals("DESC")) {
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -2789,7 +2789,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
@@ -2950,7 +2950,7 @@ public class Main implements Runnable{
 
 
                     String enteredData=searchData2.getTheObject().getText();
-                    String[] columns = {"id", "ŠG", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
                     Object[][] values = new Object[0][];
                     System.out.println(sortList.getTheObject().getSelectedItem());
                     System.out.println(sortList1.getTheObject().getSelectedItem());
@@ -2970,7 +2970,7 @@ public class Main implements Runnable{
                         while (set.next()) {
 
                             tempArray = new Object[]{
-                                    set.getInt("id"), set.getString("schoolYear"), set.getString("entryDate"), set.getString("name"),
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
                                     set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
                                     set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
                                     set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
