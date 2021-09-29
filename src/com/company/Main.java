@@ -148,19 +148,6 @@ public class Main implements Runnable{
 
     public static void main(String[] args) throws SQLException {
 
-       /* DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
-        defaultPieDataset.setValue("value", 30);
-        defaultPieDataset.setValue("value2", 45);
-        JFreeChart chart= ChartFactory.createPieChart3D("Values", defaultPieDataset, true, true, false);
-
-        JFrame chartJFrame= new JFrame();
-        chartJFrame.setPreferredSize(new Dimension(800,500));
-        ChartPanel chartPanel= new ChartPanel(chart);
-        chartJFrame.add(chartPanel);
-        chartJFrame.pack();
-        chartJFrame.setVisible(true);*/
-
-
 
 
         //JDBC
@@ -729,7 +716,7 @@ public class Main implements Runnable{
 
         // Components for resultsPanel
 
-        String[] listForSorting = {"Filter", "id", "Ime", "Prezime", "Bodovi"};
+        String[] listForSorting = {"Filter", "id", "Ime", "Prezime", "Bodovi", "Školska godina"};
         MyFrame<JComboBox> sortList = new MyFrame<>(new JComboBox(listForSorting));
         sortList.getTheObject().setPreferredSize(new Dimension(200, 50));
         sortList.getTheObject().setBorder(BorderFactory.createMatteBorder(0, 0, 0, 2, Color.decode("#66d9ff")));
@@ -754,8 +741,8 @@ public class Main implements Runnable{
         searchData2.getTheObject().setForeground(Color.lightGray);
         searchData2.getTheObject().setHorizontalAlignment(JTextField.CENTER);
 
-        MyFrame<JLabel> searchLabel = new MyFrame<>(new JLabel("Pretraga po imenu ili prezimenu"));
-        searchLabel.getTheObject().setPreferredSize(new Dimension(250, 50));
+        MyFrame<JLabel> searchLabel = new MyFrame<>(new JLabel("Pretraga prema pojmu (ime, ime oca, prezime...)"));
+        searchLabel.getTheObject().setPreferredSize(new Dimension(400, 50));
         searchLabel.getTheObject().setHorizontalAlignment(JLabel.CENTER);
         searchLabel.getTheObject().setBackground(Color.DARK_GRAY);
         searchLabel.getTheObject().setForeground(Color.lightGray);
@@ -1344,23 +1331,35 @@ public class Main implements Runnable{
 
                 ResultSet set = connectionHandler.connectAndLogin("SELECT * FROM users");
                 try {
+
                     while (set.next()) {
                         if (set.getString("username").equals(usernameCred) && set.getString("password").equals(stringifyPassword)) {
                             System.out.println("Validno");
-                            loginJFrame.getTheObject().setVisible(false);
                             obj.getTheObject().setVisible(true);
+                            loginJFrame.getTheObject().setVisible(false);
+                            defaultJDialog.setVisible(false);
+                            return;
 
-                        } if(!(set.getString("username").equals(usernameCred) && set.getString("password").equals(stringifyPassword))) {
-                            System.out.println("Korisnicko ime ili šifra nisu tačni");
-                            GridBagConstraints localGBC = new GridBagConstraints();
-                            localGBC.gridx = 1;
-                            localGBC.gridy = 4;
-                            localGBC.insets = new Insets(10, 0, 0, 0);
 
-                            defaultJLabelText.setText("Korisnicko ime ili šifra nisu tačni");
-                            defaultJDialog.setVisible(true);
                         }
-                    }
+
+                          if (!(set.getString("username").equals(usernameCred) && set.getString("password").equals(stringifyPassword))) {
+                                System.out.println("Korisnicko ime ili šifra nisu tačni");
+                                GridBagConstraints localGBC = new GridBagConstraints();
+                                localGBC.gridx = 1;
+                                localGBC.gridy = 4;
+                                localGBC.insets = new Insets(10, 0, 0, 0);
+
+                                defaultJLabelText.setText("Korisnicko ime ili šifra nisu tačni");
+                                defaultJDialog.setVisible(true);
+
+
+
+                            }
+                        }
+
+
+
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -1671,78 +1670,7 @@ public class Main implements Runnable{
                     jFrame.setVisible(true);
 
 
-                    /*
 
-                    Workbook workbook=new XSSFWorkbook();
-                    Sheet sheet= workbook.createSheet("Resultati");
-
-
-
-
-                    File file= new File("/home/emir/Desktop/");
-                    JFileChooser fileChooser= new JFileChooser();
-                    //fileChooser.setCurrentDirectory(file);
-
-
-
-
-                      Row rowHeader=sheet.createRow(0);
-                      rowHeader.createCell(0).setCellValue("id");
-                      rowHeader.createCell(1).setCellValue("Školska god.");
-                      rowHeader.createCell(2).setCellValue("Datum upisa");
-                      rowHeader.createCell(3).setCellValue("Ime");
-                      rowHeader.createCell(4).setCellValue("Ime oca");
-                      rowHeader.createCell(5).setCellValue("Prezime");
-                      rowHeader.createCell(6).setCellValue("Datum rođ.");
-                      rowHeader.createCell(7).setCellValue("Opšti uspj. VII");
-                      rowHeader.createCell(8).setCellValue("Opšti uspj. VIII");
-                      rowHeader.createCell(9).setCellValue("Opšti uspj. IX");
-                      rowHeader.createCell(10).setCellValue("Rel. pred. I (VIII)");
-                      rowHeader.createCell(11).setCellValue("Rel. pred. II (VIII)");
-                      rowHeader.createCell(12).setCellValue("Rel. pred. III (VIII)");
-                      rowHeader.createCell(13).setCellValue("Rel. pred. I (IX)");
-                      rowHeader.createCell(14).setCellValue("Rel. pred. II (IX)");
-                      rowHeader.createCell(15).setCellValue("Rel. pred. III (IX)");
-                      rowHeader.createCell(16).setCellValue("Međunarodno tak.");
-                      rowHeader.createCell(17).setCellValue("Federalno tak.");
-                      rowHeader.createCell(18).setCellValue("Kantonalno tak.");
-                      rowHeader.createCell(19).setCellValue("Posebna dipl.");
-                      rowHeader.createCell(20).setCellValue("Eksterna mat.");
-                      rowHeader.createCell(21).setCellValue("Broj bodova.");
-
-                    FileOutputStream fileOutputStream= new FileOutputStream(file);
-                    for (int i=0; i<jTable.getRowCount();i++){
-
-
-
-                        Row row= sheet.createRow(i);
-                        for (int j=0;j<jTable.getColumnCount();j++){
-                            Cell cell= row.createCell(j);
-                            cell.setCellValue(jTable.getValueAt(i,j).toString());
-
-
-
-
-                        }
-                    }
-                    int returnValue=fileChooser.showSaveDialog(RsFrame);
-
-                    if (returnValue==JFileChooser.APPROVE_OPTION){
-
-                       File file1=new File(fileChooser.getSelectedFile().getAbsolutePath());
-
-
-                        try {
-                            workbook.write(new FileOutputStream(file1));
-                            workbook.close();
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                    workbook.write(fileOutputStream);
-                      workbook.close();
-
-*/
                     jl.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
@@ -2928,6 +2856,327 @@ public class Main implements Runnable{
 
 
                 }
+                ////////////////////////////////////////////////////////////////////////////
+
+                if (sortList.getTheObject().getSelectedItem().equals("Školska godina") && sortList1.getTheObject().getSelectedItem().equals("ASC")) {
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    Object[][] values = new Object[0][];
+                    System.out.println(sortList.getTheObject().getSelectedItem());
+                    System.out.println(sortList1.getTheObject().getSelectedItem());
+                    Object[] tempArray;
+                    DefaultTableModel tableModel = new DefaultTableModel(values, columns);
+                    ResultSet set = null;
+
+                    try {
+                        PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY schoolYear ASC");
+                        set = preparedStatement.executeQuery();
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        while (set.next()) {
+
+                            tempArray = new Object[]{
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
+                                    set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
+                                    set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
+                                    set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
+                                    set.getString("fC"), set.getString("cC"), set.getString("sD"), set.getDouble("ex"), set.getString("sum")};
+
+
+                            tableModel.addRow(tempArray);
+
+
+                        }
+
+
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    JTable jTable = new JTable(tableModel);
+
+                    JScrollPane jScrollPane = new JScrollPane(jTable);
+                    jScrollPane.createHorizontalScrollBar();
+                    jScrollPane.createVerticalScrollBar();
+
+                    JPanel resPanel = new JPanel();
+                    resPanel.setPreferredSize(new Dimension(1600,900));
+                    resPanel.setBackground(Color.darkGray);
+
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
+                    resPanel.add(jScrollPane);
+                    jScrollPane.setPreferredSize(new Dimension(1600, 900));
+
+
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
+                    jFrame.setPreferredSize(new Dimension(1600, 900));
+                    jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    jFrame.add(resPanel);
+                    jFrame.pack();
+                    jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable, RsFrame);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+
+
+
+                }
+
+                if (sortList.getTheObject().getSelectedItem().equals("Školska godina") && sortList1.getTheObject().getSelectedItem().equals("DESC")) {
+                    String[] columns = {"id", "ŠG","Smjer", "Datum", "Ime", "Ime oca", "Prezime", "Datum rođenja", "Opšti uspjeh VII", "Opšti uspjeh VIII", "Opšti uspjeh IX", "Rel. pred. I (VIII)", "Rel. pred. II (VIII)", "Rel. pred. III (VIII)", "Rel. pred. I (IX)", "Rel. pred. II (IX)", "Rel. pred. III (IX)", "Međunarodno takmičenje", "Federalno takmičenje", "Kantonalno takmčenje", "Posebna diploma", "Externa matura", "Broj bodova"};
+                    Object[][] values = new Object[0][];
+                    System.out.println(sortList.getTheObject().getSelectedItem());
+                    System.out.println(sortList1.getTheObject().getSelectedItem());
+                    Object[] tempArray;
+                    DefaultTableModel tableModel = new DefaultTableModel(values, columns);
+                    ResultSet set = null;
+
+                    try {
+                        PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info ORDER BY schoolYear DESC");
+                        set = preparedStatement.executeQuery();
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        while (set.next()) {
+
+                            tempArray = new Object[]{
+                                    set.getInt("id"), set.getString("schoolYear"),set.getString("direction"), set.getString("entryDate"), set.getString("name"),
+                                    set.getString("fatherName"), set.getString("surname"), set.getString("dob"), set.getDouble("gs7"),
+                                    set.getDouble("gs8"), set.getDouble("gs9"), set.getDouble("relSubj18"), set.getDouble("relSubj28"),
+                                    set.getDouble("relSubj38"), set.getDouble("relSubj19"), set.getDouble("relSubj29"), set.getDouble("relSubj39"), set.getString("iC"),
+                                    set.getString("fC"), set.getString("cC"), set.getString("sD"), set.getDouble("ex"), set.getString("sum")};
+
+
+                            tableModel.addRow(tempArray);
+
+
+                        }
+
+
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                    JTable jTable = new JTable(tableModel);
+
+                    JScrollPane jScrollPane = new JScrollPane(jTable);
+                    jScrollPane.createHorizontalScrollBar();
+                    jScrollPane.createVerticalScrollBar();
+
+                    JPanel resPanel = new JPanel();
+                    resPanel.setPreferredSize(new Dimension(1600,900));
+                    resPanel.setBackground(Color.darkGray);
+
+                    BoxLayout boxLayout= new BoxLayout(resPanel, BoxLayout.X_AXIS);
+                    resPanel.setLayout(boxLayout);
+                    resPanel.add(Box.createRigidArea(new Dimension(0,10)));
+
+                    JPanel resPanelSide= new JPanel();
+                    resPanelSide.setPreferredSize(new Dimension(64,900));
+                    resPanelSide.setBackground(Color.black);
+                    resPanelSide.setLayout(new GridLayout(6,1, 10, 20 ));
+
+// za printer icona
+//<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    JLabel jl= new JLabel(ii);
+
+                    resPanelSide.add(jl);
+                    jl.setToolTipText("Pritisnite za printanje dokumenta");
+
+
+
+                    ////<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    //Slika za snimanje dokumenta
+
+                    ImageIcon iO= new ImageIcon("src/com/company/export.png");
+                    JLabel jlO= new JLabel(iO);
+
+                    jlO.setToolTipText("Pritisnite za snimanje tabele na PC");
+                    resPanelSide.add(jlO);
+
+
+
+
+
+                    resPanel.add(resPanelSide);
+                    resPanel.add(jScrollPane);
+                    jScrollPane.setPreferredSize(new Dimension(1600, 900));
+
+
+                    JFrame jFrame = new JFrame("Tabelarni prikaz podataka");
+                    jFrame.setPreferredSize(new Dimension(1600, 900));
+                    jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    jFrame.add(resPanel);
+                    jFrame.pack();
+                    jFrame.setVisible(true);
+
+                    jl.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            try {
+                                MessageFormat msgH= new MessageFormat("Spisak učenika");
+                                boolean printJob=jTable.print(JTable.PrintMode.FIT_WIDTH);
+                                if (printJob){
+                                    System.out.println("Printanje je uspješno");
+                                }else{
+                                    System.out.println("Printanje nije uspjelo");
+                                }
+                            } catch (PrinterException ex) {
+                                ex.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+                    jlO.addMouseListener(new MouseListener() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            saveTable(jTable, RsFrame);
+                        }
+
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+
+                        }
+                    });
+
+
+
+                }
+
+                ///////////////////////////////////////////////////////////////////////////
 
 
                 if (sortList.getTheObject().getSelectedItem().equals("Filter") && sortList1.getTheObject().getSelectedItem().equals("ASC/DESC") && searchData2.getTheObject().getText().isEmpty() ){
@@ -2959,7 +3208,7 @@ public class Main implements Runnable{
                     ResultSet set = null;
 
                     try {
-                        PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info WHERE name LIKE '%" + enteredData + "%'  OR surname LIKE '%" + enteredData + "%'  ");
+                        PreparedStatement preparedStatement = connectionHandler.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT * FROM info WHERE name LIKE '%" + enteredData + "%'  OR surname LIKE '%" + enteredData + "%' OR schoolYear LIKE '%" + enteredData + "%' OR direction LIKE '%" + enteredData + "%' OR fatherName LIKE '%" + enteredData + "%'OR dob LIKE '%" + enteredData + "%'   ");
                         set = preparedStatement.executeQuery();
                         //set1 = connectionHandler.connectAndFetch("SELECT * FROM info ORDER BY surname ASC");
                     } catch (SQLException ex) {
@@ -3607,32 +3856,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
-                  /*  try {
-                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='Opšta gimnazija'");
-                        ResultSet resultSet = preparedStatement.executeQuery();
-                        while (resultSet.next()) {
-                            og24=Double.valueOf(resultSet.getRow());
-                            System.out.println(og24);
-                        }
 
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-
-                    try {
-                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='IT gimnazija'");
-                        ResultSet resultSet = preparedStatement.executeQuery();
-                        while (resultSet.next()) {
-                            double d=resultSet.getRow();
-                            it24=Double.valueOf(resultSet.getRow());
-
-
-
-                        }
-
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }*/
 
 
                     categoryDataset.setValue(og21,"Opšta gimnazija", "2021/2022");
@@ -3645,9 +3869,6 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
 
                     categoryDataset.setValue(it23,"IT gimnazija", "2023/2024");
 
-                   // categoryDataset.setValue(og24,"Opšta gimnazija", "2024/2025");
-
-                   // categoryDataset.setValue(it24,"IT gimnazija", "2024/2025");
 
 
 
@@ -3672,7 +3893,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                             numberOfAcceptances=resultSet.getRow();
 
                         }
-                        //System.out.println(numberOfAcceptances);
+
                         PreparedStatement preparedStTwo= c.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE schoolYear='2023/2024'");
                         ResultSet resultSetTwo=preparedStTwo.executeQuery();
                         while (resultSetTwo.next()){
@@ -3689,7 +3910,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
 
                         ChartPanel chartPaneLforPieC=new ChartPanel(pieChart);
                         pieChartJFrame.add(chartPaneLforPieC);
-                        //pieChartJFrame.setTitle("Broj prijavljenih učenika/broj primljenih učenika");
+
                         pieChartJFrame.pack();
                         pieChartJFrame.setVisible(true);
                     } catch (SQLException ex) {
@@ -3816,7 +4037,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                             numberOfAcceptances=resultSet.getRow();
 
                         }
-                        //System.out.println(numberOfAcceptances);
+
                         PreparedStatement preparedStTwo= c.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE schoolYear='2024/2025'");
                         ResultSet resultSetTwo=preparedStTwo.executeQuery();
                         while (resultSetTwo.next()){
@@ -4551,7 +4772,7 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
 
 
     public void run() {
-        //System.out.println("Hello from thread");
+
         JDialog defaultJDialogW= new JDialog();
         defaultJDialogW.setPreferredSize(new Dimension(600,400));
         defaultJDialogW.setTitle("Upozorenje");
@@ -4625,29 +4846,7 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
 
 
 
-                    /*  Row rowHeader=sheet.createRow(0);
-                      rowHeader.createCell(0).setCellValue("id");
-                      rowHeader.createCell(1).setCellValue("Školska god.");
-                      rowHeader.createCell(2).setCellValue("Datum upisa");
-                      rowHeader.createCell(3).setCellValue("Ime");
-                      rowHeader.createCell(4).setCellValue("Ime oca");
-                      rowHeader.createCell(5).setCellValue("Prezime");
-                      rowHeader.createCell(6).setCellValue("Datum rođ.");
-                      rowHeader.createCell(7).setCellValue("Opšti uspj. VII");
-                      rowHeader.createCell(8).setCellValue("Opšti uspj. VIII");
-                      rowHeader.createCell(9).setCellValue("Opšti uspj. IX");
-                      rowHeader.createCell(10).setCellValue("Rel. pred. I (VIII)");
-                      rowHeader.createCell(11).setCellValue("Rel. pred. II (VIII)");
-                      rowHeader.createCell(12).setCellValue("Rel. pred. III (VIII)");
-                      rowHeader.createCell(13).setCellValue("Rel. pred. I (IX)");
-                      rowHeader.createCell(14).setCellValue("Rel. pred. II (IX)");
-                      rowHeader.createCell(15).setCellValue("Rel. pred. III (IX)");
-                      rowHeader.createCell(16).setCellValue("Međunarodno tak.");
-                      rowHeader.createCell(17).setCellValue("Federalno tak.");
-                      rowHeader.createCell(18).setCellValue("Kantonalno tak.");
-                      rowHeader.createCell(19).setCellValue("Posebna dipl.");
-                      rowHeader.createCell(20).setCellValue("Eksterna mat.");
-                      rowHeader.createCell(21).setCellValue("Broj bodova.");*/
+
 
         //FileOutputStream fileOutputStream= new FileOutputStream(file);
         for (int i=0; i<jTable.getRowCount();i++){
@@ -4678,8 +4877,7 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
                 ex.printStackTrace();
             }
         }
-        //workbook.write(fileOutputStream);
-        //  workbook.close();
+
 
     }
 
