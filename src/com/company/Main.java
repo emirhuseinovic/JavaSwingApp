@@ -3398,71 +3398,644 @@ deleteButton.addMouseListener(new MouseListener() {
 
 
 labelIconStats.getTheObject().addMouseListener(new MouseListener() {
+
     @Override
     public void mouseClicked(MouseEvent e) {
-       /* DefaultPieDataset defaultPieDataset= new DefaultPieDataset();
-        DefaultCategoryDataset defaultCategoryDataset= new DefaultCategoryDataset();
-        defaultCategoryDataset.setValue(30.0, "IT Gimnazija", "2020/2021");
-        defaultCategoryDataset.setValue(30.0, "IT Gimnazija", "2021/2022");
-        defaultCategoryDataset.setValue(40.0, "IT Gimnazija", "2022/2022");
-        defaultCategoryDataset.setValue(10.0, "IT Gimnazija", "2023/2024");
-        defaultCategoryDataset.setValue(60.0, "IT Gimnazija", "2024/2025");
 
-        defaultCategoryDataset.setValue(10.0, "Opšta Gimnazija", "2020/2021");
-        defaultCategoryDataset.setValue(20.0, "Opšta Gimnazija", "2021/2022");
-        defaultCategoryDataset.setValue(80.0, "Opšta Gimnazija", "2022/2022");
-        defaultCategoryDataset.setValue(30.0, "Opšta Gimnazija", "2023/2024");
-        defaultCategoryDataset.setValue(20.0, "Opšta Gimnazija", "2024/2025");
-*/
-       // defaultPieDataset.setValue("value", 30);
-       // defaultPieDataset.setValue("value2", 45);
-       // JFreeChart chart= ChartFactory.createPieChart3D("Procenat primljenih učenika", defaultPieDataset, true, true, false);
-        /////////////////////////////////////////////////////
-      //  JFreeChart chart1=ChartFactory.createLineChart("Boj upisanih učenika kroz petogodišnji period", "Školske godine", "Broj upisanih učenika",defaultCategoryDataset, PlotOrientation.VERTICAL,
-             //   true,true,false);
+        JFrame infoFrame= new JFrame();
+      infoFrame.setPreferredSize(new Dimension(1280,768));
+      infoFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+      infoFrame.setTitle("Statistički podaci");
+      String [] list= {"Školska godina","2022/2023","2023/2024","2024/2025","2025/2026","2026/2027"};
+      JComboBox sy=new JComboBox(list);
+      sy.setPreferredSize(new Dimension(200,50));
+      JLabel jLabelTip= new JLabel("Molimo izaberite školsku godinu");
+      jLabelTip.setForeground(Color.lightGray);
+      JButton jButtonShowStats= new JButton("Prikaži statistiku");
+      jButtonShowStats.setPreferredSize(new Dimension(200,50));
+      jButtonShowStats.setBackground(Color.darkGray);
+      jButtonShowStats.setForeground(Color.lightGray);
+      JPanel wrapper= new JPanel(new GridBagLayout());
+      GridBagConstraints gbc= new GridBagConstraints();
+      wrapper.setPreferredSize(new Dimension(1280,768));
+      wrapper.setBackground(Color.darkGray);
+      ImageIcon icon= new ImageIcon("src/com/company/stats.png");
+      JLabel labelIcon= new JLabel(icon);
 
-        ////////////////////////////////////////////////////
-        JFrame chartJFrame= new JFrame();
-        chartJFrame.setPreferredSize(new Dimension(800,500));
-       // ChartPanel chartPanel= new ChartPanel(chart);
-        //ChartPanel chartPanel1= new ChartPanel(chart1);
+      gbc.gridx=0;
+      gbc.gridy=0;
+      //gbc.insets= new Insets(20,0,0,0);
+      wrapper.add(labelIcon, gbc);
 
-       // chartJFrame.add(chartPanel);
-        //chartJFrame.add(chartPanel1);
+     gbc.gridx=0;
+     gbc.gridy=1;
+     //gbc.insets= new Insets(20,0,0,0);
+     wrapper.add(sy, gbc);
+
+     gbc.gridx=0;
+     gbc.gridy=2;
+     gbc.insets= new Insets(20,0,0,0);
+     wrapper.add(jLabelTip, gbc);
+
+     gbc.gridx=1;
+     gbc.gridy=1;
+     gbc.insets= new Insets(0,0,0,0);
+     wrapper.add(jButtonShowStats, gbc);
 
 
-        chartJFrame.pack();
-       // chartJFrame.setVisible(true);
+     infoFrame.add(wrapper);
+      infoFrame.pack();
+      infoFrame.setVisible(true);
+      //////////////////////////////////////////////////////////////////////////
+        jButtonShowStats.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-      /*  ConnectionHandler conHand= new ConnectionHandler();
+                double it21=16.0;
+                double og21=34.0;
+                double it22=0;
+                double og22=0;
+                double it23=0;
+                double og23=0;
+                double it24=0;
+                double og24=0;
+                double it25=0;
+                double og25=0;
+                double it26=0;
+                double og26=0;
 
-        try {
-            PreparedStatement sTmT= conHand.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-" ).prepareStatement("SELECT sum FROM info WHERE sum>54");
-           ResultSet resSet=sTmT.executeQuery();
-           while (resSet.next()){
-               defaultPieDataset.setValue("Broj učenika koji zadovoljavaju kriterije", resSet.getRow());
+
+                if (sy.getSelectedItem().equals("2022/2023")) {
+                    DefaultCategoryDataset categoryDataset= new DefaultCategoryDataset();
+                    JFreeChart lineChart= ChartFactory.createLineChart("Statistički prikaz kroz godine", "Školske godine", "Broj upisanih učenika", categoryDataset);
+
+                    ConnectionHandler ch = new ConnectionHandler();
+                try {
+                    PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='IT gimnazija'");
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                       it22=Double.valueOf(resultSet.getRow());
 
 
-           }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        PreparedStatement sTmT= null;
-        try {
-            sTmT = conHand.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-" ).prepareStatement("SELECT * FROM info");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            ResultSet resSet=sTmT.executeQuery();
-            while (resSet.next()){
-                defaultPieDataset.setValue("Ukupan broj prijavljenih učenika", resSet.getRow());
+                    }
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                           og22=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                    categoryDataset.setValue(og21,"Opšta gimnazija", "2021/2022");
+                    categoryDataset.setValue(og22,"Opšta gimnazija", "2022/2023");
+
+                    categoryDataset.setValue(it21,"IT gimnazija", "2021/2022");
+                    categoryDataset.setValue(it22,"IT gimnazija", "2022/2023");
+
+
+
+
+                    JFrame jFrameTwo= new JFrame();
+                    jFrameTwo.setPreferredSize(new Dimension(1280,768));
+                    jFrameTwo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    ChartPanel chartPanel= new ChartPanel(lineChart);
+                    jFrameTwo.add(chartPanel);
+                    jFrameTwo.pack();
+                    jFrameTwo.setVisible(true);
+
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-*/
-        chartJFrame.setVisible(true);
+                if (sy.getSelectedItem().equals("2024/2025")) {
+                    DefaultCategoryDataset categoryDataset= new DefaultCategoryDataset();
+                    JFreeChart lineChart= ChartFactory.createLineChart("Statistički prikaz kroz godine", "Školske godine", "Broj upisanih učenika", categoryDataset);
+
+                    ConnectionHandler ch = new ConnectionHandler();
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            it22=Double.valueOf(resultSet.getRow());
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og22=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            double d=resultSet.getRow();
+                            it23=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og23=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og24=Double.valueOf(resultSet.getRow());
+                            System.out.println(og24);
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            double d=resultSet.getRow();
+                            it24=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                    categoryDataset.setValue(og21,"Opšta gimnazija", "2021/2022");
+                    categoryDataset.setValue(it21,"IT gimnazija", "2021/2022");
+
+                    categoryDataset.setValue(og22,"Opšta gimnazija", "2022/2023");
+                    categoryDataset.setValue(it22,"IT gimnazija", "2022/2023");
+
+                    categoryDataset.setValue(og23,"Opšta gimnazija", "2023/2024");
+
+                    categoryDataset.setValue(it23,"IT gimnazija", "2023/2024");
+
+                    categoryDataset.setValue(og24,"Opšta gimnazija", "2024/2025");
+
+                    categoryDataset.setValue(it24,"IT gimnazija", "2024/2025");
+
+
+
+                    //System.out.println(it21);
+                    //System.out.println(it22);
+
+                    JFrame jFrameTwo= new JFrame();
+                    jFrameTwo.setPreferredSize(new Dimension(1280,768));
+                    jFrameTwo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    ChartPanel chartPanel= new ChartPanel(lineChart);
+                    jFrameTwo.add(chartPanel);
+                    jFrameTwo.pack();
+                    jFrameTwo.setVisible(true);
+
+                }
+                if (sy.getSelectedItem().equals("2023/2024")) {
+                    DefaultCategoryDataset categoryDataset= new DefaultCategoryDataset();
+                    JFreeChart lineChart= ChartFactory.createLineChart("Statistički prikaz kroz godine", "Školske godine", "Broj upisanih učenika", categoryDataset);
+
+                    ConnectionHandler ch = new ConnectionHandler();
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            it22=Double.valueOf(resultSet.getRow());
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og22=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            double d=resultSet.getRow();
+                            it23=Double.valueOf(resultSet.getRow());
+
+                            System.out.println("IT23 je"+it23);
+                            System.out.println("d"+d);
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og23=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                    categoryDataset.setValue(og21,"Opšta gimnazija", "2021/2022");
+                    categoryDataset.setValue(it21,"IT gimnazija", "2021/2022");
+
+                    categoryDataset.setValue(og22,"Opšta gimnazija", "2022/2023");
+                    categoryDataset.setValue(it22,"IT gimnazija", "2022/2023");
+
+                    categoryDataset.setValue(og23,"Opšta gimnazija", "2023/2024");
+
+                    categoryDataset.setValue(it23,"IT gimnazija", "2023/2024");
+
+
+
+                    //System.out.println(it21);
+                    //System.out.println(it22);
+
+                    JFrame jFrameTwo= new JFrame();
+                    jFrameTwo.setPreferredSize(new Dimension(1280,768));
+                    jFrameTwo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    ChartPanel chartPanel= new ChartPanel(lineChart);
+                    jFrameTwo.add(chartPanel);
+                    jFrameTwo.pack();
+                    jFrameTwo.setVisible(true);
+
+                }
+
+                if (sy.getSelectedItem().equals("2025/2026")) {
+                    DefaultCategoryDataset categoryDataset= new DefaultCategoryDataset();
+                    JFreeChart lineChart= ChartFactory.createLineChart("Statistički prikaz kroz godine", "Školske godine", "Broj upisanih učenika", categoryDataset);
+
+                    ConnectionHandler ch = new ConnectionHandler();
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            it22=Double.valueOf(resultSet.getRow());
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og22=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            double d=resultSet.getRow();
+                            it23=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og23=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og24=Double.valueOf(resultSet.getRow());
+                            System.out.println(og24);
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            double d=resultSet.getRow();
+                            it24=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2025/2026' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og25=Double.valueOf(resultSet.getRow());
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2025/2026' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+
+                            it25=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                    categoryDataset.setValue(og21,"Opšta gimnazija", "2021/2022");
+                    categoryDataset.setValue(it21,"IT gimnazija", "2021/2022");
+
+                    categoryDataset.setValue(og22,"Opšta gimnazija", "2022/2023");
+                    categoryDataset.setValue(it22,"IT gimnazija", "2022/2023");
+
+                    categoryDataset.setValue(og23,"Opšta gimnazija", "2023/2024");
+
+                    categoryDataset.setValue(it23,"IT gimnazija", "2023/2024");
+
+                    categoryDataset.setValue(og24,"Opšta gimnazija", "2024/2025");
+
+                    categoryDataset.setValue(it24,"IT gimnazija", "2024/2025");
+
+                    categoryDataset.setValue(og25,"Opšta gimnazija", "2025/2026");
+
+                    categoryDataset.setValue(it25,"IT gimnazija", "2025/2026");
+
+
+
+                    //System.out.println(it21);
+                    //System.out.println(it22);
+
+                    JFrame jFrameTwo= new JFrame();
+                    jFrameTwo.setPreferredSize(new Dimension(1280,768));
+                    jFrameTwo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    ChartPanel chartPanel= new ChartPanel(lineChart);
+                    jFrameTwo.add(chartPanel);
+                    jFrameTwo.pack();
+                    jFrameTwo.setVisible(true);
+
+                }
+
+                if (sy.getSelectedItem().equals("2026/2027")) {
+                    DefaultCategoryDataset categoryDataset= new DefaultCategoryDataset();
+                    JFreeChart lineChart= ChartFactory.createLineChart("Statistički prikaz kroz godine", "Školske godine", "Broj upisanih učenika", categoryDataset);
+
+                    ConnectionHandler ch = new ConnectionHandler();
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            it22=Double.valueOf(resultSet.getRow());
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2022/2023' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og22=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            double d=resultSet.getRow();
+                            it23=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2023/2024' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og23=Double.valueOf(resultSet.getRow());
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og24=Double.valueOf(resultSet.getRow());
+                            System.out.println(og24);
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2024/2025' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            double d=resultSet.getRow();
+                            it24=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2025/2026' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og25=Double.valueOf(resultSet.getRow());
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2025/2026' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+
+                            it25=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2026/2027' AND direction='Opšta gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+                            og26=Double.valueOf(resultSet.getRow());
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement preparedStatement = ch.getCon("jdbc:mysql://localhost:3306/datei", "root", "Arsenal2001-").prepareStatement("SELECT sum FROM info WHERE sum>=54 AND schoolYear='2026/2027' AND direction='IT gimnazija'");
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        while (resultSet.next()) {
+
+                            it26=Double.valueOf(resultSet.getRow());
+
+
+
+                        }
+
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+
+
+                    categoryDataset.setValue(og21,"Opšta gimnazija", "2021/2022");
+                    categoryDataset.setValue(it21,"IT gimnazija", "2021/2022");
+
+                    categoryDataset.setValue(og22,"Opšta gimnazija", "2022/2023");
+                    categoryDataset.setValue(it22,"IT gimnazija", "2022/2023");
+
+                    categoryDataset.setValue(og23,"Opšta gimnazija", "2023/2024");
+
+                    categoryDataset.setValue(it23,"IT gimnazija", "2023/2024");
+
+                    categoryDataset.setValue(og24,"Opšta gimnazija", "2024/2025");
+
+                    categoryDataset.setValue(it24,"IT gimnazija", "2024/2025");
+
+                    categoryDataset.setValue(og25,"Opšta gimnazija", "2025/2026");
+
+                    categoryDataset.setValue(it25,"IT gimnazija", "2025/2026");
+
+                    categoryDataset.setValue(og26,"Opšta gimnazija", "2026/2027");
+
+                    categoryDataset.setValue(it26,"IT gimnazija", "2026/2027");
+
+
+
+
+                    JFrame jFrameTwo= new JFrame();
+                    jFrameTwo.setPreferredSize(new Dimension(1280,768));
+                    jFrameTwo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    ChartPanel chartPanel= new ChartPanel(lineChart);
+                    jFrameTwo.add(chartPanel);
+                    jFrameTwo.pack();
+                    jFrameTwo.setVisible(true);
+
+                }
+                /*JFrame jFrameTwo= new JFrame();
+                jFrameTwo.setPreferredSize(new Dimension(1280,768));
+                jFrameTwo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                ChartPanel chartPanel= new ChartPanel(lineChart);
+                jFrameTwo.add(chartPanel);
+                jFrameTwo.pack();
+                jFrameTwo.setVisible(true);*/
+            }
+        });
+
+    ////////////////////////////////////////////////////////////////////////////
+
+
     }
 
     @Override
