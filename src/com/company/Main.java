@@ -4,16 +4,16 @@ package com.company;
 
 import com.toedter.calendar.JCalendar;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.JFrame;
 
 import java.awt.*;
 import java.awt.Color;
 import java.awt.event.*;
-import java.awt.print.Printable;
+
 import java.awt.print.PrinterException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
+
 import java.sql.*;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
@@ -30,15 +30,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
+
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.Dataset;
+
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.xy.DefaultHighLowDataset;
-import org.jfree.ui.tabbedui.VerticalLayout;
 
 
-public class Main implements Runnable{
+
+
+public class Main {
 
 
 
@@ -264,7 +264,7 @@ public class Main implements Runnable{
 
         // Creating icons
         // all icons wil be attributed in Credit page when the project is over
-        ImageIcon iconPlus = new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/plus(1).png");
+        ImageIcon iconPlus = new ImageIcon("src/com/company/plus(1).png");
         //<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Pixel perfect from www.flaticon.com"
         MyFrame<JLabel> labelIconOne = new MyFrame<JLabel>(new JLabel(iconPlus));
@@ -272,21 +272,21 @@ public class Main implements Runnable{
         labelIconOne.getTheObject().setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         labelIconOne.getTheObject().setToolTipText("Unos novih podataka");
 
-        ImageIcon iconList = new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/list(1).png");
+        ImageIcon iconList = new ImageIcon("src/com/company/list(1).png");
         //<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Pixel perfect from www.flaticon.com"
         MyFrame<JLabel> labelIconTwo = new MyFrame<JLabel>(new JLabel(iconList));
         labelIconTwo.getTheObject().setSize(new Dimension(32, 32));
         labelIconTwo.getTheObject().setToolTipText("Pregled unešenih podataka");
 
-        ImageIcon iconDelete = new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/delete(1).png");
+        ImageIcon iconDelete = new ImageIcon("src/com/company/delete(1).png");
         //<div>Icons made by <a href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup">Pixelmeetup</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Pixelmeetup from www.flaticon.com"
         MyFrame<JLabel> labelIconThree = new MyFrame<JLabel>(new JLabel(iconDelete));
         labelIconThree.getTheObject().setSize(new Dimension(32, 32));
         labelIconThree.getTheObject().setToolTipText("Brisanje podataka");
 
-        ImageIcon statsIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/stats.png");
+        ImageIcon statsIcon= new ImageIcon("src/com/company/stats.png");
         //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Freepik from www.flaticon.com"
         MyFrame<JLabel> labelIconStats = new MyFrame<JLabel>(new JLabel(statsIcon));
@@ -294,14 +294,14 @@ public class Main implements Runnable{
         labelIconStats.getTheObject().setToolTipText("Statistika");
 
 
-        ImageIcon iconShutDown = new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/power-button(1).png");
+        ImageIcon iconShutDown = new ImageIcon("src/com/company/power-button(1).png");
         //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Freepik from www.flaticon.com"
         MyFrame<JLabel> labelIconFour = new MyFrame<JLabel>(new JLabel(iconShutDown));
         labelIconFour.getTheObject().setSize(new Dimension(32, 32));
-        labelIconFour.getTheObject().setToolTipText("Odjava");
+        labelIconFour.getTheObject().setToolTipText("Odjava i gašenje programa");
 
-        ImageIcon iconBigPlus = new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/bigPlus.png");
+        ImageIcon iconBigPlus = new ImageIcon("src/com/company/bigPlus.png");
         //<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Pixel perfect from www.flaticon.com"
         MyFrame<JLabel> labelBigPlus = new MyFrame<JLabel>(new JLabel(iconBigPlus));
@@ -344,7 +344,7 @@ public class Main implements Runnable{
         jCalendar.getTheObject().setPreferredSize(new Dimension(400, 200));
         jCalendar.getTheObject().setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#66d9ff")));
 
-        ImageIcon calendarIcon = new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/calendar.png");
+        ImageIcon calendarIcon = new ImageIcon("src/com/company/calendar.png");
         JLabel calendarIconLabel = new JLabel(calendarIcon);
         calendarIconLabel.setPreferredSize(new Dimension(32, 32));
         // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -658,12 +658,13 @@ public class Main implements Runnable{
         finishButtonPoPThree.getTheObject().setBackground(Color.darkGray);
 
         // Components for loginPanel
-        MyFrame<JLabel> usernameIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/user(1).png")));
+        MyFrame<JLabel> usernameIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("src/com/company/user(1).png")));
         // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Freepik from www.flaticon.com"
         usernameIcon.getTheObject().setPreferredSize(new Dimension(32, 32));
         usernameIcon.getTheObject().setBackground(Color.DARK_GRAY);
         usernameIcon.getTheObject().setForeground(Color.gray);
+        usernameIcon.getTheObject().setToolTipText("Molimo unesite korisničko ime");
 
         MyFrame<JTextField> username = new MyFrame<JTextField>(new JTextField());
         username.getTheObject().setPreferredSize(new Dimension(400, 50));
@@ -677,12 +678,13 @@ public class Main implements Runnable{
         usernameLabel.getTheObject().setBackground(Color.DARK_GRAY);
         usernameLabel.getTheObject().setForeground(Color.gray);
 
-        MyFrame<JLabel> passwordIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/padlock(1).png")));
+        MyFrame<JLabel> passwordIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("src/com/company/padlock(1).png")));
         //<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         //"Icon made by Pixel perfect from www.flaticon.com"
         passwordIcon.getTheObject().setPreferredSize(new Dimension(32, 32));
         passwordIcon.getTheObject().setBackground(Color.DARK_GRAY);
         passwordIcon.getTheObject().setForeground(Color.gray);
+        passwordIcon.getTheObject().setToolTipText("Molimo unesite šifru");
 
         MyFrame<JPasswordField> password = new MyFrame<JPasswordField>(new JPasswordField());
         password.getTheObject().setPreferredSize(new Dimension(400, 50));
@@ -754,7 +756,7 @@ public class Main implements Runnable{
         showButton.setBackground(Color.darkGray);
 
         //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-        ImageIcon searchIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/search.png");
+        ImageIcon searchIcon= new ImageIcon("src/com/company/search.png");
         MyFrame<JLabel> searchIL = new MyFrame<>(new JLabel(searchIcon));
         searchIL.getTheObject().setPreferredSize(new Dimension(250, 64));
         searchIL.getTheObject().setHorizontalAlignment(JLabel.CENTER);
@@ -784,7 +786,7 @@ public class Main implements Runnable{
         //<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
         // za plavu vecu kantu sa poklopce<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 // za orange kanu sa krugom <div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-        ImageIcon iIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/trash.png");
+        ImageIcon iIcon= new ImageIcon("src/com/company/trash.png");
         JLabel traschCanIcon= new JLabel(iIcon);
 
         // for 64 big remove<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
@@ -798,7 +800,7 @@ public class Main implements Runnable{
         defaultJPanel.setPreferredSize(new Dimension(600,400));
         defaultJPanel.setBackground(Color.darkGray);
         defaultJPanel.setLayout(new GridBagLayout());
-        ImageIcon warningIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
+        ImageIcon warningIcon= new ImageIcon("src/com/company/remove.png");
         JLabel defaultJLabel=new JLabel(warningIcon);
         JLabel defaultJLabelText= new JLabel("Upozorenje");
         defaultJLabelText.setForeground(Color.white);
@@ -1632,7 +1634,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -1958,7 +1960,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -2116,7 +2118,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -2276,7 +2278,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -2435,7 +2437,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -2595,7 +2597,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -2754,7 +2756,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -2916,7 +2918,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -3075,7 +3077,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -3256,7 +3258,7 @@ public class Main implements Runnable{
 
 // za printer icona
 //<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                    ImageIcon ii= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/printer.png");
+                    ImageIcon ii= new ImageIcon("src/com/company/printer.png");
                     JLabel jl= new JLabel(ii);
 
                     resPanelSide.add(jl);
@@ -3501,7 +3503,7 @@ deleteButton.addMouseListener(new MouseListener() {
         defaultJPanel.setPreferredSize(new Dimension(600,400));
         defaultJPanel.setBackground(Color.darkGray);
         defaultJPanel.setLayout(new GridBagLayout());
-        ImageIcon warningIcon= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
+        ImageIcon warningIcon= new ImageIcon("src/com/company/remove.png");
         JLabel defaultJLabel=new JLabel(warningIcon);
         JLabel defaultJLabelText= new JLabel("Morate unijeti ID za brisanje");
         defaultJLabelText.setForeground(Color.white);
@@ -3517,6 +3519,13 @@ deleteButton.addMouseListener(new MouseListener() {
         defaultJDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         defaultJDialog.pack();
         defaultJDialog.setVisible(false);
+
+        no.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteDialog.setVisible(false);
+            }
+        });
 
         if (!(searchForDeletion.getTheObject().getText().isEmpty())){
 
@@ -3668,27 +3677,28 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
       GridBagConstraints gbc= new GridBagConstraints();
       wrapper.setPreferredSize(new Dimension(1280,768));
       wrapper.setBackground(Color.darkGray);
-      ImageIcon icon= new ImageIcon("src/com/company/stats.png");
+      //<div>Icons made by <a href="https://www.flaticon.com/authors/ultimatearm" title="ultimatearm">ultimatearm</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      ImageIcon icon= new ImageIcon("src/com/company/research.png");
       JLabel labelIcon= new JLabel(icon);
 
-      gbc.gridx=0;
+      gbc.gridx=1;
       gbc.gridy=0;
-      //gbc.insets= new Insets(20,0,0,0);
+      gbc.insets= new Insets(20,-450,50,0);
       wrapper.add(labelIcon, gbc);
 
      gbc.gridx=0;
      gbc.gridy=1;
-     //gbc.insets= new Insets(20,0,0,0);
+     gbc.insets= new Insets(0,220,0,0);
      wrapper.add(sy, gbc);
 
      gbc.gridx=0;
      gbc.gridy=2;
-     gbc.insets= new Insets(20,0,0,0);
+     gbc.insets= new Insets(20,220,0,0);
      wrapper.add(jLabelTip, gbc);
 
      gbc.gridx=1;
      gbc.gridy=1;
-     gbc.insets= new Insets(0,0,0,0);
+     gbc.insets= new Insets(0,20,0,0);
      wrapper.add(jButtonShowStats, gbc);
 
 
@@ -4504,6 +4514,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
         });
 
         newAccountLink.getTheObject().addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -4513,12 +4524,13 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                 newAccountHeadline.getTheObject().setBackground(Color.DARK_GRAY);
                 newAccountHeadline.getTheObject().setForeground(Color.decode("#66d9ff"));
 
-                MyFrame<JLabel> usernameIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/user(1).png")));
+                MyFrame<JLabel> usernameIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("src/com/company/user(1).png")));
                 // <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 //"Icon made by Freepik from www.flaticon.com"
                 usernameIcon.getTheObject().setPreferredSize(new Dimension(32, 32));
                 usernameIcon.getTheObject().setBackground(Color.DARK_GRAY);
                 usernameIcon.getTheObject().setForeground(Color.gray);
+                usernameIcon.getTheObject().setToolTipText("Molimo unesite korisničko ime");
 
                 MyFrame<JTextField> username = new MyFrame<JTextField>(new JTextField());
                 username.getTheObject().setPreferredSize(new Dimension(400, 50));
@@ -4532,12 +4544,13 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                 usernameLabel.getTheObject().setBackground(Color.DARK_GRAY);
                 usernameLabel.getTheObject().setForeground(Color.gray);
 
-                MyFrame<JLabel> passwordIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/padlock(1).png")));
+                MyFrame<JLabel> passwordIcon = new MyFrame<JLabel>(new JLabel(new ImageIcon("src/com/company/padlock(1).png")));
                 //<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
                 //"Icon made by Pixel perfect from www.flaticon.com"
                 passwordIcon.getTheObject().setPreferredSize(new Dimension(32, 32));
                 passwordIcon.getTheObject().setBackground(Color.DARK_GRAY);
                 passwordIcon.getTheObject().setForeground(Color.gray);
+                passwordIcon.getTheObject().setToolTipText("Molimo unesite šifru");
 
                 MyFrame<JPasswordField> password = new MyFrame<JPasswordField>(new JPasswordField());
                 password.getTheObject().setPreferredSize(new Dimension(400, 50));
@@ -4558,6 +4571,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                 cancelButton.getTheObject().setForeground(Color.decode("#66d9ff"));
                 cancelButton.getTheObject().setPreferredSize(new Dimension(200, 50));
                 cancelButton.getTheObject().setBackground(Color.darkGray);
+
 
                 MyFrame<JButton> createButon = new MyFrame<JButton>(new JButton("Kreiraj račun"));
                 createButon.getTheObject().setForeground(Color.decode("#66d9ff"));
@@ -4618,55 +4632,73 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                 createButon.getTheObject().addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        ConnectionHandler conHandler= new ConnectionHandler();
+
+                        boolean ok=false;
+                        boolean no=false;
+                        int noAccount=0;
                         String convertPassword=String.valueOf(password.getTheObject().getPassword());
-                        boolean occupied=false;
-                        try {
-                            Connection connection= conHandler.getCon("jdbc:mysql://localhost:3306/login", "root", "Arsenal2001-");
-                            PreparedStatement preparedStatement=connection.prepareStatement("SELECT * FROM users");
-                            ResultSet resultSet=preparedStatement.executeQuery();
 
-                            while (resultSet.next()){
+                        ConnectionHandler connectionHandlerA=new ConnectionHandler();
+                        if (convertPassword.equals("") || username.getTheObject().getText().equals("")) {
 
-                                if (username.getTheObject().getText().equals(resultSet.getString("username"))&& convertPassword.equals(resultSet.getString("password"))){
-                                    occupied=true;
+                            defaultJLabelText.setText("Polja ne smiju biti prazna");
+                            defaultJDialog.setVisible(true);
+                            createAccJFrame.revalidate();
+                            createAccJFrame.repaint();
+                            return;
+                        }else {
+                            try {
+                                PreparedStatement preparedStatement = connectionHandlerA.getCon("jdbc:mysql://localhost:3306/login", "root", "Arsenal2001-").prepareStatement("SELECT username,password FROM users");
+                                ResultSet resultSet = preparedStatement.executeQuery();
+                                while (resultSet.next()) {
+                                    noAccount = resultSet.getRow();
+                                    if (!(resultSet.getString("username").equals(username.getTheObject().getText()) && resultSet.getString("password").equals(convertPassword))) {
+                                        ok = true;
 
+                                    }
+                                    if (resultSet.getString("username").equals(username.getTheObject().getText()) || resultSet.getString("password").equals(convertPassword)) {
 
-                                   }
-                                   else {
+                                        Thread thread = new Thread(new ThreadClass());
+                                        thread.start();
+                                        thread.interrupt();
+                                        return;
 
-                                    occupied=false;
-
-
+                                    }
 
 
                                 }
 
+                                if (ok) {
+                                    String newPsTm = "INSERT INTO users(username, password) VALUES('" + username.getTheObject().getText() + "', '" + convertPassword + "')";
+                                    PreparedStatement preparedStatement1 = connectionHandlerA.getCon("jdbc:mysql://localhost:3306/login", "root", "Arsenal2001-").prepareStatement(newPsTm);
+                                    preparedStatement1.executeUpdate();
+                                    preparedStatement1.close();
+                                    accountCreatedDialog();
+                                    createAccJFrame.repaint();
+                                    createAccJFrame.revalidate();
+                                    createAccJFrame.setVisible(false);
 
+                                }
+                                /////////////////////////////// Provjeriti da li funkcionise
+                                if (noAccount == 0 && !(username.getTheObject().getText().equals(null)||convertPassword.equals(null))) {
+                                    String newPsTm = "INSERT INTO users(username, password) VALUES('" + username.getTheObject().getText() + "', '" + username.getTheObject().getText() + "')";
+                                    PreparedStatement preparedStatement1 = connectionHandlerA.getCon("jdbc:mysql://localhost:3306/login", "root", "Arsenal2001-").prepareStatement(newPsTm);
+                                    preparedStatement1.executeUpdate();
+                                    preparedStatement1.close();
+                                    accountCreatedDialog();
+                                    createAccJFrame.repaint();
+                                    createAccJFrame.revalidate();
+                                    createAccJFrame.setVisible(false);
+
+                                }
+                                ///////////////////////////////
+                                preparedStatement.close();
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
                             }
-                            if (occupied){
-                                defaultJLabelText.setText("Korisničko ime već postoji");
-                                defaultJDialog.setVisible(true);
-                                Thread newMainThread= new Thread(new Main());
-                                newMainThread.start();
-
-
-
-                            }else {
-                                preparedStatement=connection.prepareStatement("INSERT INTO users (username, password) VALUES ('" + username.getTheObject().getText() + "','" + convertPassword + "')");
-                                preparedStatement.executeUpdate();
-                                accountCreatedDialog();
-                                createAccJFrame.setVisible(false);
-
-
-                            }
-
-
-
-
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
                         }
+
+
                     }
 
                     @Override
@@ -4689,7 +4721,12 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
 
                     }
                 });
-
+                    cancelButton.getTheObject().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            createAccJFrame.setVisible(false);
+                        }
+                    });
 
 
             }
@@ -4766,43 +4803,41 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
     }
 });
 
+labelIconFour.getTheObject().addMouseListener(new MouseListener() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        //obj.getTheObject().dispose();
+        System.exit(0);
+    }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+});
 
     }
 
 
-    public void run() {
-
-        JDialog defaultJDialogW= new JDialog();
-        defaultJDialogW.setPreferredSize(new Dimension(600,400));
-        defaultJDialogW.setTitle("Upozorenje");
-        JPanel defaultJPanelW= new JPanel();
-        defaultJPanelW.setPreferredSize(new Dimension(600,400));
-        defaultJPanelW.setBackground(Color.darkGray);
-        defaultJPanelW.setLayout(new GridBagLayout());
-        ImageIcon warningIconW= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/remove.png");
-        JLabel defaultJLabelW=new JLabel(warningIconW);
-        JLabel defaultJLabelTextW= new JLabel("Unešena šifra je zauzeta");
-        defaultJLabelTextW.setForeground(Color.white);
-
-        GridBagConstraints constraintsW= new GridBagConstraints();
-
-        constraintsW.gridx=0;
-        constraintsW.gridy=0;
-        constraintsW.insets= new Insets(0, 0, 20, 0);
-        defaultJPanelW.add(defaultJLabelW, constraintsW);
-        constraintsW.gridx=0;
-        constraintsW.gridy=1;
-        defaultJPanelW.add(defaultJLabelTextW, constraintsW);
-        defaultJDialogW.add(defaultJPanelW);
-        defaultJDialogW.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        defaultJDialogW.pack();
-        defaultJDialogW.setVisible(true);
 
 
 
 
-    }
     public static void accountCreatedDialog(){
         JDialog defaultJDialogOk= new JDialog();
         defaultJDialogOk.setPreferredSize(new Dimension(600,400));
@@ -4811,7 +4846,7 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
         defaultJPanelOk.setPreferredSize(new Dimension(600,400));
         defaultJPanelOk.setBackground(Color.darkGray);
         defaultJPanelOk.setLayout(new GridBagLayout());
-        ImageIcon warningIconOk= new ImageIcon("/home/emir/IdeaProjects/JavaSwingApp/src/com/company/checked.png");
+        ImageIcon warningIconOk= new ImageIcon("src/com/company/checked.png");
         JLabel defaultJLabelOk=new JLabel(warningIconOk);
         JLabel defaultJLabelTextOk= new JLabel("Korisnik je uspješno kreiran, želimo Vam ugodno korištenje");
         defaultJLabelTextOk.setForeground(Color.white);
@@ -4839,7 +4874,7 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
 
 
 
-        File file= new File("/home/emir/Desktop/");
+        File file= new File("c:\\");
         JFileChooser fileChooser= new JFileChooser();
         //fileChooser.setCurrentDirectory(file);
 
