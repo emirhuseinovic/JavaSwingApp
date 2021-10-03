@@ -4681,7 +4681,7 @@ labelIconStats.getTheObject().addMouseListener(new MouseListener() {
                                 }
                                 /////////////////////////////// Provjeriti da li funkcionise
                                 if (noAccount == 0 && !(username.getTheObject().getText().equals(null)||convertPassword.equals(null))) {
-                                    String newPsTm = "INSERT INTO users(username, password) VALUES('" + username.getTheObject().getText() + "', '" + username.getTheObject().getText() + "')";
+                                    String newPsTm = "INSERT INTO users(username, password) VALUES('" + username.getTheObject().getText() + "', '" + convertPassword + "')";
                                     PreparedStatement preparedStatement1 = connectionHandlerA.getCon("jdbc:mysql://localhost:3306/login", "root", "Arsenal2001-").prepareStatement(newPsTm);
                                     preparedStatement1.executeUpdate();
                                     preparedStatement1.close();
@@ -4760,17 +4760,21 @@ iconInfoLabel.getTheObject().addMouseListener(new MouseListener() {
         infoFrame.setTitle("Informacije o aplikaciji");
 
         JPanel infoPanel= new JPanel();
-        infoPanel.setPreferredSize(new Dimension(1280, 768));
+        infoPanel.setPreferredSize(new Dimension(1280, 1536));
         BoxLayout boxLayout= new BoxLayout(infoPanel, BoxLayout.Y_AXIS);
         infoPanel.setLayout(boxLayout);
 
-        ImageIcon image= new ImageIcon("src/com/company/ventus.png");
+        ImageIcon image= new ImageIcon("src/com/company/United2.png");
         JLabel jInfoLabel= new JLabel(image);
-        jInfoLabel.setPreferredSize(new Dimension(1280,768));
+        jInfoLabel.setPreferredSize(new Dimension(1280,1536));
         JScrollPane jScrollPane= new JScrollPane(jInfoLabel);
-        jScrollPane.setPreferredSize(new Dimension(1280,768));
+        jScrollPane.setPreferredSize(new Dimension(1280,1536));
+
+
+
 
         infoPanel.add(jScrollPane);
+
 
 
 
